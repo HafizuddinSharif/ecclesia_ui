@@ -1,6 +1,8 @@
 import 'package:ecclesia_ui/client/widgets/custom_appbar.dart';
 import 'package:ecclesia_ui/client/widgets/custom_drawer.dart';
+import 'package:ecclesia_ui/server/bloc/election_overview_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class ElectionDashboard extends StatelessWidget {
@@ -8,30 +10,45 @@ class ElectionDashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: const Color.fromARGB(255, 246, 248, 250),
-        appBar: const CustomAppBar(
-          back: true,
-          disableBackGuard: true,
-          disableMenu: false,
-        ),
-        endDrawer: const CustomDrawer(),
-        bottomNavigationBar: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: ElevatedButton(
-              onPressed: () {
-                context.go('/election-detail/voting');
-              },
-              child: const Text('Start voting')),
-        ),
-        body: ListView(
-          children: const [
-            ElectionStatus(),
-            VotingOptions(),
-            VoteCasted(),
-            ElectionDescription(),
-          ],
-        ));
+    return BlocProvider(
+      create: (context) => ElectionOverviewBloc()..add(LoadElectionOverview()),
+      child: Scaffold(
+          backgroundColor: const Color.fromARGB(255, 246, 248, 250),
+          appBar: const CustomAppBar(
+            back: true,
+            disableBackGuard: true,
+            disableMenu: false,
+          ),
+          endDrawer: const CustomDrawer(),
+          bottomNavigationBar: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: ElevatedButton(
+                onPressed: () {
+                  context.go('/election-detail/voting');
+                },
+                child: const Text('Start voting')),
+          ),
+          body: ListView(
+            children: [
+              BlocBuilder<ElectionOverviewBloc, ElectionOverviewState>(
+                builder: (context, state) {
+                  if (state is ElectionOverviewInitial) {
+                    return const CircularProgressIndicator(
+                      color: Colors.blue,
+                    );
+                  } else if (state is ElectionOverviewLoaded) {
+                    return ElectionStatus(title: state.election.title);
+                  } else {
+                    return const Text('Something is wrong');
+                  }
+                },
+              ),
+              const VotingOptions(),
+              const VoteCasted(),
+              const ElectionDescription(),
+            ],
+          )),
+    );
   }
 }
 
@@ -207,8 +224,11 @@ class VoteChoiceRow extends StatelessWidget {
 }
 
 class ElectionStatus extends StatelessWidget {
+  final String title;
+
   const ElectionStatus({
     Key? key,
+    required this.title,
   }) : super(key: key);
 
   @override
@@ -229,8 +249,8 @@ class ElectionStatus extends StatelessWidget {
             'Edinburgh Baking Society',
             style: TextStyle(fontSize: 12),
           ),
-          const Text('President 22/23',
-              style: TextStyle(
+          Text(title,
+              style: const TextStyle(
                 fontWeight: FontWeight.w700,
                 fontSize: 20,
               )),

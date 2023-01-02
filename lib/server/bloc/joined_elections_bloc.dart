@@ -13,7 +13,7 @@ class JoinedElectionsBloc extends Bloc<JoinedElectionsEvent, JoinedElectionsStat
   JoinedElectionsBloc() : super(JoinedElectionsInitial()) {
     on<LoadJoinedElection>(
       (event, emit) async {
-        await Future<void>.delayed(const Duration(seconds: 5));
+        await Future<void>.delayed(const Duration(seconds: 2));
         emit(JoinedElectionsLoaded(elections: Voter.voters[0].joinedElections));
       },
     );
