@@ -7,29 +7,22 @@ abstract class JoinedElectionsEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class LoadJoinedElection extends JoinedElectionsEvent {
-  final List<Election> election;
+class LoadJoinedElection extends JoinedElectionsEvent {}
 
-  const LoadJoinedElection(this.election);
+// class AddJoinedElection extends JoinedElectionsEvent {
+//   final Election election;
 
-  @override
-  List<Object> get props => [election];
-}
+//   const AddJoinedElection(this.election);
 
-class AddJoinedElection extends JoinedElectionsEvent {
-  final Election election;
+//   @override
+//   List<Object> get props => [election];
+// }
 
-  const AddJoinedElection(this.election);
+// class RemoveJoinedElection extends JoinedElectionsEvent {
+//   final Election election;
 
-  @override
-  List<Object> get props => [election];
-}
+//   const RemoveJoinedElection(this.election);
 
-class RemoveJoinedElection extends JoinedElectionsEvent {
-  final Election election;
-
-  const RemoveJoinedElection(this.election);
-
-  @override
-  List<Object> get props => [election];
-}
+//   @override
+//   List<Object> get props => [election];
+// }

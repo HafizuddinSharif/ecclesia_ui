@@ -27,7 +27,6 @@ class Voter extends Equatable {
       joinedElections: {
         Election.elections[0]: ElectionStatusEnum.voteNotOpen,
         Election.elections[1]: ElectionStatusEnum.voteOpen,
-        Election.elections[2]: ElectionStatusEnum.castingBallot,
       },
     ),
     Voter(

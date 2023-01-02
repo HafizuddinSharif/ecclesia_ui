@@ -17,7 +17,7 @@ class ElectionCard extends StatelessWidget {
   }) : super(key: key);
 
   final Map<ElectionStatusEnum, ElectionOverviewModel> electionCardOptions = {
-    ElectionStatusEnum.voteNotOpen: ElectionOverviewModel('Note open yet', Colors.orange),
+    ElectionStatusEnum.voteNotOpen: ElectionOverviewModel('Not open yet', Colors.orange),
     ElectionStatusEnum.voteOpen: ElectionOverviewModel('Open to vote', Colors.green),
     ElectionStatusEnum.voteEnding: ElectionOverviewModel('Ending in 5 hours', Colors.red),
     ElectionStatusEnum.voteClosed: ElectionOverviewModel('Voting closed', Colors.black),

@@ -11,7 +11,7 @@ abstract class JoinedElectionsState extends Equatable {
 class JoinedElectionsInitial extends JoinedElectionsState {}
 
 class JoinedElectionsLoaded extends JoinedElectionsState {
-  final List<Election> elections;
+  final Map<Election, ElectionStatusEnum> elections;
 
   const JoinedElectionsLoaded({required this.elections});
 

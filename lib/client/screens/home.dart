@@ -23,7 +23,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => JoinedElectionsBloc()..add(LoadJoinedElection(Election.elections)),
+      create: (context) => JoinedElectionsBloc()..add(LoadJoinedElection()),
       child: Scaffold(
           backgroundColor: const Color.fromARGB(255, 246, 248, 250),
           appBar: const CustomAppBar(back: false, disableBackGuard: false, disableMenu: false),
@@ -92,11 +92,12 @@ class Home extends StatelessWidget {
                             padding: const EdgeInsets.only(bottom: 100),
                             itemCount: state.elections.length,
                             itemBuilder: (_, index) {
+                              Election key = state.elections.keys.elementAt(index);
                               return ElectionCard(
-                                electionTitle: state.elections[index].title,
-                                electionDescription: state.elections[index].description,
-                                electionOrganization: state.elections[index].organization,
-                                status: electionListDummy[index].status,
+                                electionTitle: key.title,
+                                electionDescription: key.description,
+                                electionOrganization: key.organization,
+                                status: state.elections[key]!,
                               );
                             },
                           ),
