@@ -1,37 +1,30 @@
+import 'package:ecclesia_ui/client/widgets/status_tag.dart';
 import 'package:ecclesia_ui/data/models/election_overview_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class ElectionCard extends StatelessWidget {
+  final String id;
   final ElectionStatusEnum status;
   final String electionTitle;
   final String electionDescription;
   final String electionOrganization;
 
-  ElectionCard({
+  const ElectionCard({
     Key? key,
+    required this.id,
     required this.status,
     required this.electionTitle,
     required this.electionDescription,
     required this.electionOrganization,
   }) : super(key: key);
 
-  final Map<ElectionStatusEnum, ElectionOverviewModel> electionCardOptions = {
-    ElectionStatusEnum.voteNotOpen: ElectionOverviewModel('Not open yet', Colors.orange),
-    ElectionStatusEnum.voteOpen: ElectionOverviewModel('Open to vote', Colors.green),
-    ElectionStatusEnum.voteEnding: ElectionOverviewModel('Ending in 5 hours', Colors.red),
-    ElectionStatusEnum.voteClosed: ElectionOverviewModel('Voting closed', Colors.black),
-    ElectionStatusEnum.voted: ElectionOverviewModel('You have voted', Colors.blue),
-    ElectionStatusEnum.registeringDetails: ElectionOverviewModel('Registering your details', Colors.orange),
-    ElectionStatusEnum.castingBallot: ElectionOverviewModel('Casting your ballot', Colors.orange),
-  };
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        debugPrint('Container clicked!');
-        context.go('/election-detail');
+        // debugPrint('Container clicked!');
+        context.go('/election-detail/$id');
       },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
@@ -61,19 +54,7 @@ class ElectionCard extends StatelessWidget {
                       fontSize: 18.0,
                       fontWeight: FontWeight.w700,
                     )),
-                Container(
-                  padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 10.0),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: electionCardOptions[status]!.color,
-                    borderRadius: BorderRadius.circular(100.0),
-                  ),
-                  child: Text(electionCardOptions[status]!.statusDesc,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: Colors.white,
-                      )),
-                )
+                StatusTag(status: status),
               ],
             ),
             Text(electionOrganization, style: const TextStyle(fontStyle: FontStyle.italic)),

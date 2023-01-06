@@ -1,8 +1,18 @@
 import 'package:ecclesia_ui/client/config/app_router.dart';
+import 'package:ecclesia_ui/server/bloc/election_overview_bloc.dart';
+import 'package:ecclesia_ui/server/bloc/joined_elections_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiBlocProvider(providers: [
+    BlocProvider<JoinedElectionsBloc>(
+      create: (context) => JoinedElectionsBloc(),
+    ),
+    BlocProvider<ElectionOverviewBloc>(
+      create: (context) => ElectionOverviewBloc(),
+    ),
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

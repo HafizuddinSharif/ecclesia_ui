@@ -6,16 +6,19 @@ import 'package:ecclesia_ui/client/screens/register_confirmation.dart';
 import 'package:ecclesia_ui/client/screens/register_organization.dart';
 import 'package:ecclesia_ui/client/screens/voting.dart';
 import 'package:ecclesia_ui/client/screens/voting_casted.dart';
+import 'package:ecclesia_ui/server/bloc/joined_elections_bloc.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-final GoRouter appRouter = GoRouter(
+GoRouter appRouter = GoRouter(
   routes: <GoRoute>[
     GoRoute(
       path: '/',
-      builder: (BuildContext context, GoRouterState state) {
-        return Home();
-      },
+      builder: (context, state) => BlocProvider.value(
+        value: JoinedElectionsBloc(),
+        child: Home(),
+      ),
       routes: <GoRoute>[
         // Past Elections
         GoRoute(
@@ -26,9 +29,9 @@ final GoRouter appRouter = GoRouter(
         ),
         // Election Detail
         GoRoute(
-          path: 'election-detail',
+          path: 'election-detail/:electionId',
           builder: (BuildContext context, GoRouterState state) {
-            return const ElectionDashboard();
+            return ElectionDashboard(id: state.params['electionId']!);
           },
           routes: <GoRoute>[
             // Voting

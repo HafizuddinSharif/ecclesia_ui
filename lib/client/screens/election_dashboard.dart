@@ -1,17 +1,24 @@
 import 'package:ecclesia_ui/client/widgets/custom_appbar.dart';
 import 'package:ecclesia_ui/client/widgets/custom_drawer.dart';
+import 'package:ecclesia_ui/client/widgets/status_tag.dart';
+import 'package:ecclesia_ui/data/models/choice_model.dart';
+import 'package:ecclesia_ui/data/models/election_overview_model.dart';
 import 'package:ecclesia_ui/server/bloc/election_overview_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
 class ElectionDashboard extends StatelessWidget {
-  const ElectionDashboard({Key? key}) : super(key: key);
+  final String id;
+
+  const ElectionDashboard({Key? key, required this.id}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ElectionOverviewBloc()..add(LoadElectionOverview()),
+    debugPrint("The id is $id");
+    return BlocProvider.value(
+      value: BlocProvider.of<ElectionOverviewBloc>(context)..add(LoadElectionOverview(id: id)),
       child: Scaffold(
           backgroundColor: const Color.fromARGB(255, 246, 248, 250),
           appBar: const CustomAppBar(
@@ -37,7 +44,15 @@ class ElectionDashboard extends StatelessWidget {
                       color: Colors.blue,
                     );
                   } else if (state is ElectionOverviewLoaded) {
-                    return ElectionStatus(title: state.election.title);
+                    return ElectionStatus(
+                      title: state.election.title,
+                      description: state.election.description,
+                      organization: state.election.organization,
+                      status: state.status,
+                      startTime: state.election.startTime,
+                      endTime: state.election.endTime,
+                      choices: state.election.choices,
+                    );
                   } else {
                     return const Text('Something is wrong');
                   }
@@ -225,10 +240,22 @@ class VoteChoiceRow extends StatelessWidget {
 
 class ElectionStatus extends StatelessWidget {
   final String title;
+  final String description;
+  final String organization;
+  final ElectionStatusEnum status;
+  final DateTime startTime;
+  final DateTime endTime;
+  final List<Choice> choices;
 
   const ElectionStatus({
     Key? key,
     required this.title,
+    required this.description,
+    required this.status,
+    required this.startTime,
+    required this.endTime,
+    required this.choices,
+    required this.organization,
   }) : super(key: key);
 
   @override
@@ -244,36 +271,31 @@ class ElectionStatus extends StatelessWidget {
             offset: const Offset(0, 6)),
       ]),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            'Edinburgh Baking Society',
-            style: TextStyle(fontSize: 12),
+          Text(
+            organization,
+            style: const TextStyle(fontSize: 12),
           ),
           Text(title,
               style: const TextStyle(
                 fontWeight: FontWeight.w700,
                 fontSize: 20,
               )),
-          Container(
-            margin: const EdgeInsets.symmetric(vertical: 10),
-            padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 20),
-            decoration: BoxDecoration(
-              color: Colors.orange,
-              borderRadius: BorderRadius.circular(100.0),
-            ),
-            child: const Text('Setting up',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 12,
-                )),
+          const SizedBox(
+            height: 10,
+          ),
+          StatusTag(status: status),
+          const SizedBox(
+            height: 10,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Icon(Icons.calendar_month),
+            children: [
+              const Icon(Icons.calendar_month),
               Text(
-                '  Voting starts on 24/02/2023',
-                style: TextStyle(fontSize: 12),
+                '  Voting starts on ${DateFormat.yMd().format(startTime)}',
+                style: const TextStyle(fontSize: 12),
               ),
             ],
           ),

@@ -22,8 +22,8 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => JoinedElectionsBloc()..add(LoadJoinedElection()),
+    return BlocProvider.value(
+      value: BlocProvider.of<JoinedElectionsBloc>(context)..add(LoadJoinedElection()),
       child: Scaffold(
           backgroundColor: const Color.fromARGB(255, 246, 248, 250),
           appBar: const CustomAppBar(back: false, disableBackGuard: false, disableMenu: false),
@@ -63,6 +63,7 @@ class Home extends StatelessWidget {
                     ),
                   ),
                   ElectionCard(
+                      id: "0",
                       electionTitle: 'Treasurer 22/23',
                       electionDescription: 'Description will be placed here. For this example, I am going to demonstrate what happen if the description test is long. If it populate more than 2 lines, it will be truncated.',
                       electionOrganization: 'Edinburgh University Sports Union (EUSU)',
@@ -94,6 +95,7 @@ class Home extends StatelessWidget {
                             itemBuilder: (_, index) {
                               Election key = state.elections.keys.elementAt(index);
                               return ElectionCard(
+                                id: key.id,
                                 electionTitle: key.title,
                                 electionDescription: key.description,
                                 electionOrganization: key.organization,
