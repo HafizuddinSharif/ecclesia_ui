@@ -1,6 +1,7 @@
 import 'package:ecclesia_ui/client/widgets/custom_appbar.dart';
 import 'package:ecclesia_ui/client/widgets/custom_drawer.dart';
 import 'package:ecclesia_ui/client/widgets/status_tag.dart';
+import 'package:ecclesia_ui/client/widgets/status_tag_description.dart';
 import 'package:ecclesia_ui/data/models/choice_model.dart';
 import 'package:ecclesia_ui/data/models/election_overview_model.dart';
 import 'package:ecclesia_ui/server/bloc/election_overview_bloc.dart';
@@ -58,9 +59,20 @@ class ElectionDashboard extends StatelessWidget {
                   }
                 },
               ),
-              const VotingOptions(),
-              const VoteCasted(),
               const ElectionDescription(),
+              const VotingOptions(),
+              BlocBuilder<ElectionOverviewBloc, ElectionOverviewState>(
+                builder: (context, state) {
+                  if (state is ElectionOverviewInitial) {
+                    return const CircularProgressIndicator(color: Colors.blue);
+                  } else if (state is ElectionOverviewLoaded) {
+                    bool castedStatus = state.status == ElectionStatusEnum.voted || state.status == ElectionStatusEnum.voteClosed;
+                    return castedStatus ? const VoteCasted() : const SizedBox();
+                  } else {
+                    return const Text('Something is wrong');
+                  }
+                },
+              ),
             ],
           )),
     );
@@ -299,29 +311,7 @@ class ElectionStatus extends StatelessWidget {
               ),
             ],
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              children: [
-                const Icon(
-                  Icons.dangerous_rounded,
-                  size: 80,
-                  color: Colors.red,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text('You have not voted yet',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                        )),
-                    Text('Wait for the election to open.'),
-                  ],
-                )
-              ],
-            ),
-          )
+          StatusTagDescription(status: status),
         ],
       ),
     );
