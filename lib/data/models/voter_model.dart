@@ -1,3 +1,4 @@
+import 'package:ecclesia_ui/data/models/choice_model.dart';
 import 'package:ecclesia_ui/data/models/election_model.dart';
 import 'package:ecclesia_ui/data/models/election_overview_model.dart';
 import 'package:equatable/equatable.dart';
@@ -7,12 +8,14 @@ class Voter extends Equatable {
   final String name;
   final String publicKey;
   final Map<Election, ElectionStatusEnum> joinedElections;
+  final Map<Election, Choice> votedChoices;
 
   const Voter({
     required this.id,
     required this.name,
     required this.publicKey,
     required this.joinedElections,
+    required this.votedChoices,
   });
 
   @override
@@ -29,6 +32,11 @@ class Voter extends Equatable {
         Election.elections[1]: ElectionStatusEnum.voteOpen,
         Election.elections[3]: ElectionStatusEnum.voted,
       },
+      votedChoices: {
+        Election.elections[0]: Choice.noVote,
+        Election.elections[1]: Choice.noVote,
+        Election.elections[3]: Choice.noVote,
+      },
     ),
     Voter(
       id: '1',
@@ -38,6 +46,11 @@ class Voter extends Equatable {
         Election.elections[0]: ElectionStatusEnum.voted,
         Election.elections[1]: ElectionStatusEnum.voteEnding,
         Election.elections[2]: ElectionStatusEnum.registeringDetails,
+      },
+      votedChoices: {
+        Election.elections[0]: Choice.noVote,
+        Election.elections[1]: Choice.noVote,
+        Election.elections[3]: Choice.noVote,
       },
     ),
   ];
