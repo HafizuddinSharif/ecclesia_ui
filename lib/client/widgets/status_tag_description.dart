@@ -23,38 +23,36 @@ class StatusTagDescription extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-      child: Flexible(
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Icon(
-              electionCardOptions[status]!.icon,
-              size: 80,
-              color: electionCardOptions[status]!.color,
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Icon(
+            electionCardOptions[status]!.icon,
+            size: 80,
+            color: electionCardOptions[status]!.color,
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          Flexible(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(electionCardOptions[status]!.statusDesc,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                    )),
+                Text(
+                  electionCardOptions[status]!.subtitle,
+                  softWrap: true,
+                  // overflow: TextOverflow.ellipsis,
+                ),
+              ],
             ),
-            const SizedBox(
-              width: 10,
-            ),
-            Flexible(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(electionCardOptions[status]!.statusDesc,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                      )),
-                  Text(
-                    electionCardOptions[status]!.subtitle,
-                    softWrap: true,
-                    // overflow: TextOverflow.ellipsis,
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
+          )
+        ],
       ),
     );
   }

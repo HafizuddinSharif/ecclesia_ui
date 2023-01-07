@@ -32,7 +32,7 @@ class ElectionDashboard extends StatelessWidget {
             padding: const EdgeInsets.all(20.0),
             child: ElevatedButton(
                 onPressed: () {
-                  context.go('/election-detail/voting');
+                  context.go('/election-detail/$id/voting');
                 },
                 child: const Text('Start voting')),
           ),
@@ -206,11 +206,25 @@ class VotingOptions extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
             ),
           ),
-          Column(children: const [
-            VoteChoiceRow(title: 'James Cameron'),
-            VoteChoiceRow(title: 'Susan Matthew'),
-            VoteChoiceRow(title: 'Yanning Li'),
-          ])
+          BlocBuilder<ElectionOverviewBloc, ElectionOverviewState>(
+            builder: (context, state) {
+              if (state is ElectionOverviewInitial) {
+                return const CircularProgressIndicator(color: Colors.blue);
+              } else if (state is ElectionOverviewLoaded) {
+                Iterable<VoteChoiceRow> rows = state.election.choices.map(
+                  (e) => VoteChoiceRow(title: e.title),
+                );
+                return Column(children: rows.toList(growable: false));
+                // return Column(children: const [
+                //   VoteChoiceRow(title: 'James Cameron'),
+                //   VoteChoiceRow(title: 'Susan Matthew'),
+                //   VoteChoiceRow(title: 'Yanning Li'),
+                // ]);
+              } else {
+                return const Text('Something is wrong');
+              }
+            },
+          )
         ],
       ),
     );

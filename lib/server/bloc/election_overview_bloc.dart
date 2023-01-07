@@ -14,7 +14,7 @@ class ElectionOverviewBloc extends Bloc<ElectionOverviewEvent, ElectionOverviewS
       // await Future<void>.delayed(const Duration(seconds: 2));
       int id = int.parse(event.id);
       Election election = Election.elections[id];
-      ElectionStatusEnum status = Voter.voters[0].joinedElections[election]!;
+      ElectionStatusEnum status = Voter.voters[1].joinedElections[election]!;
       emit(ElectionOverviewLoaded(election: election, status: status, id: event.id));
     });
     on<ChangeElectionOverview>(((event, emit) {

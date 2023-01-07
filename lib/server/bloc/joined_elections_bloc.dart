@@ -14,7 +14,7 @@ class JoinedElectionsBloc extends Bloc<JoinedElectionsEvent, JoinedElectionsStat
     on<LoadJoinedElection>(
       (event, emit) async {
         await Future<void>.delayed(const Duration(seconds: 2));
-        emit(JoinedElectionsLoaded(elections: Voter.voters[0].joinedElections));
+        emit(JoinedElectionsLoaded(elections: Voter.voters[1].joinedElections)); // To change the user of the app, just change the index value of the voter here.
       },
     );
     // on<AddJoinedElection>(

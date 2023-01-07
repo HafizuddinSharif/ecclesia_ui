@@ -54,8 +54,8 @@ class Home extends StatelessWidget {
               ),
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10.0),
-                child: Column(children: [
-                  const Padding(
+                child: Column(children: const [
+                  Padding(
                     padding: EdgeInsets.symmetric(vertical: 10.0),
                     child: Text(
                       'Just ended:',
