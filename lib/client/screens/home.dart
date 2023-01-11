@@ -4,6 +4,7 @@ import 'package:ecclesia_ui/data/models/election_overview_model.dart';
 import 'package:ecclesia_ui/client/widgets/custom_appbar.dart';
 import 'package:ecclesia_ui/client/widgets/custom_drawer.dart';
 import 'package:ecclesia_ui/client/widgets/election_card.dart';
+import 'package:ecclesia_ui/server/bloc/election_just_ended_bloc.dart';
 import 'package:ecclesia_ui/server/bloc/joined_elections_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,8 +23,15 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: BlocProvider.of<JoinedElectionsBloc>(context)..add(LoadJoinedElection()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider.value(
+          value: BlocProvider.of<JoinedElectionsBloc>(context)..add(LoadJoinedElection()),
+        ),
+        BlocProvider.value(
+          value: BlocProvider.of<ElectionJustEndedBloc>(context)..add(LoadElectionJustEnded(elections: Election.elections)),
+        ),
+      ],
       child: Scaffold(
           backgroundColor: const Color.fromARGB(255, 246, 248, 250),
           appBar: const CustomAppBar(back: false, disableBackGuard: false, disableMenu: false),
@@ -54,20 +62,27 @@ class Home extends StatelessWidget {
               ),
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10.0),
-                child: Column(children: const [
-                  Padding(
+                child: Column(children: [
+                  const Padding(
                     padding: EdgeInsets.symmetric(vertical: 10.0),
                     child: Text(
                       'Just ended:',
                       style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                     ),
                   ),
-                  ElectionCard(
-                      id: "0",
-                      electionTitle: 'Treasurer 22/23',
-                      electionDescription: 'Description will be placed here. For this example, I am going to demonstrate what happen if the description test is long. If it populate more than 2 lines, it will be truncated.',
-                      electionOrganization: 'Edinburgh University Sports Union (EUSU)',
-                      status: ElectionStatusEnum.voteClosed),
+                  BlocBuilder<ElectionJustEndedBloc, ElectionJustEndedState>(
+                    builder: (context, state) {
+                      if (state is ElectionJustEndedInitial) {
+                        return const CircularProgressIndicator(
+                          color: Colors.blue,
+                        );
+                      } else if (state is ElectionJustEndedLoaded) {
+                        return ElectionCard(id: state.election.id, electionTitle: state.election.title, electionDescription: state.election.description, electionOrganization: state.election.organization, status: state.status);
+                      } else {
+                        return const Text('Something is wrong');
+                      }
+                    },
+                  ),
                 ]),
               ),
               Expanded(
@@ -87,13 +102,18 @@ class Home extends StatelessWidget {
                           color: Colors.blue,
                         );
                       } else if (state is JoinedElectionsLoaded) {
-                        debugPrint('${state.elections.length}');
+                        // debugPrint('//${state.elections.length}');
                         return Expanded(
                           child: ListView.builder(
                             padding: const EdgeInsets.only(bottom: 100),
                             itemCount: state.elections.length,
                             itemBuilder: (_, index) {
                               Election key = state.elections.keys.elementAt(index);
+
+                              if (state.elections[key] == ElectionStatusEnum.voteClosed) {
+                                return Container();
+                              }
+
                               return ElectionCard(
                                 id: key.id,
                                 electionTitle: key.title,

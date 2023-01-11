@@ -43,7 +43,7 @@ class Voter extends Equatable {
       name: 'Harry Kane',
       publicKey: 'hwfig2932jf0',
       joinedElections: {
-        Election.elections[0]: ElectionStatusEnum.voted,
+        Election.elections[0]: ElectionStatusEnum.voteClosed,
         Election.elections[1]: ElectionStatusEnum.voteEnding,
         Election.elections[2]: ElectionStatusEnum.registeringDetails,
       },
