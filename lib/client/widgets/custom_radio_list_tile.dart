@@ -1,11 +1,13 @@
+import 'package:ecclesia_ui/data/models/choice_model.dart';
 import 'package:flutter/material.dart';
 
 class CustomRadioListTile<T> extends StatelessWidget {
-  final T value;
-  final T groupValue;
+  final String value;
+  final String groupValue;
   final IconData? leading;
   final Widget? title;
-  final ValueChanged<T?> onChanged;
+  final Function onChanged;
+  final Choice choice;
 
   const CustomRadioListTile({
     super.key,
@@ -13,14 +15,15 @@ class CustomRadioListTile<T> extends StatelessWidget {
     required this.groupValue,
     required this.onChanged,
     required this.leading,
-    this.title,
+    required this.title,
+    required this.choice,
   });
 
   @override
   Widget build(BuildContext context) {
     final title = this.title;
     return InkWell(
-      onTap: () => onChanged(value),
+      onTap: () => onChanged(value, choice),
       child: Container(
         height: 56,
         padding: const EdgeInsets.symmetric(horizontal: 16),

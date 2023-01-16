@@ -1,10 +1,7 @@
 part of 'election_overview_bloc.dart';
 
-abstract class ElectionOverviewEvent extends Equatable {
+abstract class ElectionOverviewEvent {
   const ElectionOverviewEvent();
-
-  @override
-  List<Object> get props => [];
 }
 
 class LoadElectionOverview extends ElectionOverviewEvent {
@@ -20,7 +17,4 @@ class ChangeElectionOverview extends ElectionOverviewEvent {
   final ElectionStatusEnum status;
 
   const ChangeElectionOverview({required this.election, required this.status});
-
-  @override
-  List<Object> get props => [election];
 }

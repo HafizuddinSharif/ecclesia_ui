@@ -6,19 +6,14 @@ import 'package:ecclesia_ui/client/screens/register_confirmation.dart';
 import 'package:ecclesia_ui/client/screens/register_organization.dart';
 import 'package:ecclesia_ui/client/screens/voting.dart';
 import 'package:ecclesia_ui/client/screens/voting_casted.dart';
-import 'package:ecclesia_ui/server/bloc/joined_elections_bloc.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 GoRouter appRouter = GoRouter(
   routes: <GoRoute>[
     GoRoute(
       path: '/',
-      builder: (context, state) => BlocProvider.value(
-        value: JoinedElectionsBloc(),
-        child: Home(),
-      ),
+      builder: (context, state) => Home(),
       routes: <GoRoute>[
         // Past Elections
         GoRoute(
@@ -38,19 +33,19 @@ GoRouter appRouter = GoRouter(
             GoRoute(
                 path: 'voting',
                 builder: (BuildContext context, GoRouterState state) {
-                  return const Voting();
+                  return Voting(id: state.params['electionId']!);
                 },
                 routes: [
                   GoRoute(
                     path: 'voting-casted',
                     builder: (BuildContext context, GoRouterState state) {
-                      return const VotingCasted();
+                      return VotingCasted(id: state.params['electionId']!);
                     },
                   )
                 ])
           ],
         ),
-        // Register to Organization
+        // Register to an organization
         GoRoute(
           path: 'register-organization',
           builder: (BuildContext context, GoRouterState state) {
@@ -58,7 +53,28 @@ GoRouter appRouter = GoRouter(
           },
           routes: [
             GoRoute(
-              path: 'register-organization-confirmation',
+              path: 'confirmation',
+              builder: (BuildContext context, GoRouterState state) {
+                return const RegisterConfirmation();
+              },
+            ),
+            GoRoute(
+              path: 'camera',
+              builder: (BuildContext context, GoRouterState state) {
+                return const RegisterCamera();
+              },
+            ),
+          ],
+        ),
+        // Register to an election
+        GoRoute(
+          path: 'register-election',
+          builder: (BuildContext context, GoRouterState state) {
+            return const RegisterOrganization();
+          },
+          routes: [
+            GoRoute(
+              path: 'confirmation',
               builder: (BuildContext context, GoRouterState state) {
                 return const RegisterConfirmation();
               },

@@ -1,22 +1,17 @@
 part of 'joined_elections_bloc.dart';
 
-abstract class JoinedElectionsEvent extends Equatable {
+abstract class JoinedElectionsEvent {
   const JoinedElectionsEvent();
-
-  @override
-  List<Object> get props => [];
 }
 
 class LoadJoinedElection extends JoinedElectionsEvent {}
 
-// class AddJoinedElection extends JoinedElectionsEvent {
-//   final Election election;
+class UpdateStatusJoinedElection extends JoinedElectionsEvent {
+  final Election election;
+  final ElectionStatusEnum status;
 
-//   const AddJoinedElection(this.election);
-
-//   @override
-//   List<Object> get props => [election];
-// }
+  const UpdateStatusJoinedElection({required this.election, required this.status});
+}
 
 // class RemoveJoinedElection extends JoinedElectionsEvent {
 //   final Election election;

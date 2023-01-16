@@ -17,7 +17,7 @@ class ElectionDashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("The id is $id");
+    // debugPrint("The id is $id");
     return BlocProvider.value(
       value: BlocProvider.of<ElectionOverviewBloc>(context)..add(LoadElectionOverview(id: id)),
       child: Scaffold(
@@ -28,13 +28,39 @@ class ElectionDashboard extends StatelessWidget {
             disableMenu: false,
           ),
           endDrawer: const CustomDrawer(),
-          bottomNavigationBar: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: ElevatedButton(
-                onPressed: () {
+          bottomNavigationBar: BlocBuilder<ElectionOverviewBloc, ElectionOverviewState>(
+            builder: (context, state) {
+              if (state is ElectionOverviewInitial) {
+                return const Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: ElevatedButton(
+                    onPressed: null,
+                    child: Text('Start voting'),
+                  ),
+                );
+              } else if (state is ElectionOverviewLoaded) {
+                goVote() {
                   context.go('/election-detail/$id/voting');
-                },
-                child: const Text('Start voting')),
+                }
+
+                if (state.status == ElectionStatusEnum.voteOpen || state.status == ElectionStatusEnum.voteEnding) {
+                  return Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: ElevatedButton(
+                      onPressed: goVote,
+                      child: const Text('Start voting'),
+                    ),
+                  );
+                } else {
+                  return const Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: ElevatedButton(onPressed: null, child: Text('Start voting')),
+                  );
+                }
+              } else {
+                return const Text("Something is wrong =(");
+              }
+            },
           ),
           body: ListView(
             children: [

@@ -2,8 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:ecclesia_ui/data/models/election_model.dart';
 import 'package:ecclesia_ui/data/models/election_overview_model.dart';
 import 'package:ecclesia_ui/data/models/voter_model.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'joined_elections_event.dart';
@@ -13,8 +11,31 @@ class JoinedElectionsBloc extends Bloc<JoinedElectionsEvent, JoinedElectionsStat
   JoinedElectionsBloc() : super(JoinedElectionsInitial()) {
     on<LoadJoinedElection>(
       (event, emit) async {
-        await Future<void>.delayed(const Duration(seconds: 2));
-        emit(JoinedElectionsLoaded(elections: Voter.voters[1].joinedElections)); // To change the user of the app, just change the index value of the voter here.
+        var user = 1; // To change the user of the app, just change the index value of the voter here.
+        if (state is JoinedElectionsLoaded) {
+          print("Happen here");
+          final state = this.state as JoinedElectionsLoaded;
+          emit(JoinedElectionsLoaded(elections: state.elections));
+        } else {
+          print("Still here");
+          await Future<void>.delayed(const Duration(seconds: 2));
+          emit(JoinedElectionsLoaded(elections: Voter.voters[user].joinedElections));
+        }
+      },
+    );
+    on<UpdateStatusJoinedElection>(
+      (event, emit) {
+        print("Yeett");
+        if (state is JoinedElectionsLoaded) {
+          final state = this.state as JoinedElectionsLoaded;
+          state.elections[event.election] = event.status;
+          print(event.election.title);
+          emit(
+            JoinedElectionsLoaded(
+              elections: state.elections,
+            ),
+          );
+        }
       },
     );
     // on<AddJoinedElection>(

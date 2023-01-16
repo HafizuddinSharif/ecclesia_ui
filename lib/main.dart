@@ -2,6 +2,7 @@ import 'package:ecclesia_ui/client/config/app_router.dart';
 import 'package:ecclesia_ui/server/bloc/election_just_ended_bloc.dart';
 import 'package:ecclesia_ui/server/bloc/election_overview_bloc.dart';
 import 'package:ecclesia_ui/server/bloc/joined_elections_bloc.dart';
+import 'package:ecclesia_ui/server/bloc/picked_choice_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,6 +16,9 @@ void main() {
     ),
     BlocProvider<ElectionJustEndedBloc>(
       create: (context) => ElectionJustEndedBloc(),
+    ),
+    BlocProvider<PickedChoiceBloc>(
+      create: (context) => PickedChoiceBloc(),
     ),
   ], child: const MyApp()));
 }

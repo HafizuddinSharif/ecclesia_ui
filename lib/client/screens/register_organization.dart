@@ -47,7 +47,7 @@ class _RegisterOrganizationState extends State<RegisterOrganization> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      context.go('/register-organization/register-organization-confirmation');
+                      context.go('/register-organization/confirmation');
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(Colors.blue),
