@@ -4,6 +4,7 @@ import 'package:ecclesia_ui/data/models/election_overview_model.dart';
 import 'package:ecclesia_ui/client/widgets/custom_appbar.dart';
 import 'package:ecclesia_ui/client/widgets/custom_drawer.dart';
 import 'package:ecclesia_ui/client/widgets/election_card.dart';
+import 'package:ecclesia_ui/data/models/voter_model.dart';
 import 'package:ecclesia_ui/server/bloc/election_just_ended_bloc.dart';
 import 'package:ecclesia_ui/server/bloc/joined_elections_bloc.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +18,11 @@ class Home extends StatelessWidget {
     ElectionCardModel('Where to hike?', 'Description will be placed here', 'Edinburgh Baking Society', ElectionStatusEnum.voted),
   ];
 
+  final Voter user;
+
   Home({
     Key? key,
+    required this.user,
   }) : super(key: key);
 
   @override
@@ -26,7 +30,7 @@ class Home extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider.value(
-          value: BlocProvider.of<JoinedElectionsBloc>(context)..add(LoadJoinedElection()),
+          value: BlocProvider.of<JoinedElectionsBloc>(context)..add(LoadJoinedElection(user: user)),
         ),
         BlocProvider.value(
           value: BlocProvider.of<ElectionJustEndedBloc>(context)..add(LoadElectionJustEnded(elections: Election.elections)),
@@ -77,7 +81,7 @@ class Home extends StatelessWidget {
                           color: Colors.blue,
                         );
                       } else if (state is ElectionJustEndedLoaded) {
-                        return ElectionCard(id: state.election.id, electionTitle: state.election.title, electionDescription: state.election.description, electionOrganization: state.election.organization, status: state.status);
+                        return ElectionCard(id: state.election.id, electionTitle: state.election.title, electionDescription: state.election.description, electionOrganization: state.election.organization, status: state.status, userId: user.id);
                       } else {
                         return const Text('Something is wrong');
                       }
@@ -120,6 +124,7 @@ class Home extends StatelessWidget {
                                 electionDescription: key.description,
                                 electionOrganization: key.organization,
                                 status: state.elections[key]!,
+                                userId: user.id,
                               );
                             },
                           ),

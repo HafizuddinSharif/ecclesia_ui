@@ -3,6 +3,7 @@ import 'package:ecclesia_ui/client/widgets/custom_drawer.dart';
 import 'package:ecclesia_ui/client/widgets/custom_radio_list_tile.dart';
 import 'package:ecclesia_ui/data/models/choice_model.dart';
 import 'package:ecclesia_ui/data/models/election_overview_model.dart';
+import 'package:ecclesia_ui/data/models/voter_model.dart';
 import 'package:ecclesia_ui/server/bloc/election_overview_bloc.dart';
 import 'package:ecclesia_ui/server/bloc/joined_elections_bloc.dart';
 import 'package:ecclesia_ui/server/bloc/picked_choice_bloc.dart';
@@ -56,7 +57,7 @@ class _VotingState extends State<Voting> {
           value: BlocProvider.of<PickedChoiceBloc>(context),
         ),
         BlocProvider.value(
-          value: BlocProvider.of<JoinedElectionsBloc>(context)..add(LoadJoinedElection()),
+          value: BlocProvider.of<JoinedElectionsBloc>(context)..add(LoadJoinedElection(user: Voter.voters[0])),
         ),
       ],
       child: Scaffold(

@@ -9,6 +9,7 @@ class ElectionCard extends StatelessWidget {
   final String electionTitle;
   final String electionDescription;
   final String electionOrganization;
+  final String userId;
 
   const ElectionCard({
     Key? key,
@@ -17,6 +18,7 @@ class ElectionCard extends StatelessWidget {
     required this.electionTitle,
     required this.electionDescription,
     required this.electionOrganization,
+    required this.userId,
   }) : super(key: key);
 
   @override
@@ -24,7 +26,7 @@ class ElectionCard extends StatelessWidget {
     return InkWell(
       onTap: () {
         // debugPrint('Container clicked!');
-        context.go('/election-detail/$id');
+        context.go('/election-detail/$id/$userId');
       },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),

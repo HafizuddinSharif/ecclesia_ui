@@ -12,14 +12,15 @@ import 'package:intl/intl.dart';
 
 class ElectionDashboard extends StatelessWidget {
   final String id;
+  final String userId;
 
-  const ElectionDashboard({Key? key, required this.id}) : super(key: key);
+  const ElectionDashboard({Key? key, required this.id, required this.userId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     // debugPrint("The id is $id");
     return BlocProvider.value(
-      value: BlocProvider.of<ElectionOverviewBloc>(context)..add(LoadElectionOverview(id: id)),
+      value: BlocProvider.of<ElectionOverviewBloc>(context)..add(LoadElectionOverview(id: id, userId: userId)),
       child: Scaffold(
           backgroundColor: const Color.fromARGB(255, 246, 248, 250),
           appBar: const CustomAppBar(

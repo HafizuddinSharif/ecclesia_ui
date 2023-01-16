@@ -4,7 +4,11 @@ abstract class JoinedElectionsEvent {
   const JoinedElectionsEvent();
 }
 
-class LoadJoinedElection extends JoinedElectionsEvent {}
+class LoadJoinedElection extends JoinedElectionsEvent {
+  final Voter user;
+
+  const LoadJoinedElection({required this.user});
+}
 
 class UpdateStatusJoinedElection extends JoinedElectionsEvent {
   final Election election;

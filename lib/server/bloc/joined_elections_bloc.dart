@@ -11,7 +11,7 @@ class JoinedElectionsBloc extends Bloc<JoinedElectionsEvent, JoinedElectionsStat
   JoinedElectionsBloc() : super(JoinedElectionsInitial()) {
     on<LoadJoinedElection>(
       (event, emit) async {
-        var user = 1; // To change the user of the app, just change the index value of the voter here.
+        var user = int.parse(event.user.id); // To change the user of the app, just change the index value of the voter here.
         if (state is JoinedElectionsLoaded) {
           print("Happen here");
           final state = this.state as JoinedElectionsLoaded;

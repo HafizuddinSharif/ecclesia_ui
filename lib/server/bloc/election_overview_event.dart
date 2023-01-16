@@ -6,9 +6,11 @@ abstract class ElectionOverviewEvent {
 
 class LoadElectionOverview extends ElectionOverviewEvent {
   final String id;
+  final String userId;
 
   const LoadElectionOverview({
     required this.id,
+    required this.userId,
   });
 }
 

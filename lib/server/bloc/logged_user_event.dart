@@ -5,7 +5,7 @@ abstract class LoggedUserEvent {
 }
 
 class LoginLoggedUserEvent extends LoggedUserEvent {
-  final Voter user;
+  final String userId;
 
-  const LoginLoggedUserEvent({required this.user});
+  const LoginLoggedUserEvent({required this.userId});
 }

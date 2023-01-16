@@ -7,7 +7,7 @@ part 'logged_user_state.dart';
 class LoggedUserBloc extends Bloc<LoggedUserEvent, LoggedUserState> {
   LoggedUserBloc() : super(LoggedUserInitial()) {
     on<LoginLoggedUserEvent>((event, emit) {
-      final Voter user = Voter.voters[0]; // User can be changed here
+      final Voter user = Voter.voters[int.parse(event.userId)]; // User can be changed here
       emit(LoggedUserLoaded(user: user));
     });
   }
