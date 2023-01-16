@@ -28,5 +28,5 @@ class Choice extends Equatable {
     const Choice(id: '2', title: 'Tikka Masala', description: 'An indian dish, but actually from the UK.', numberOfVote: 0),
   ];
 
-  static Choice noVote = const Choice(id: 'NULL', title: "", description: "", numberOfVote: 0);
+  static Choice noVote = const Choice(id: 'NULL', title: "No vote", description: "", numberOfVote: 0);
 }

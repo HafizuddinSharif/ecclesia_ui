@@ -3,8 +3,10 @@ import 'package:ecclesia_ui/client/widgets/custom_drawer.dart';
 import 'package:ecclesia_ui/client/widgets/status_tag.dart';
 import 'package:ecclesia_ui/client/widgets/status_tag_description.dart';
 import 'package:ecclesia_ui/data/models/choice_model.dart';
+import 'package:ecclesia_ui/data/models/election_model.dart';
 import 'package:ecclesia_ui/data/models/election_overview_model.dart';
 import 'package:ecclesia_ui/server/bloc/election_overview_bloc.dart';
+import 'package:ecclesia_ui/server/bloc/logged_user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -18,7 +20,6 @@ class ElectionDashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // debugPrint("The id is $id");
     return BlocProvider.value(
       value: BlocProvider.of<ElectionOverviewBloc>(context)..add(LoadElectionOverview(id: id, userId: userId)),
       child: Scaffold(
@@ -41,7 +42,11 @@ class ElectionDashboard extends StatelessWidget {
                 );
               } else if (state is ElectionOverviewLoaded) {
                 goVote() {
-                  context.go('/election-detail/$id/voting');
+                  context.go('/election-detail/$id/$userId/voting');
+                }
+
+                goSeeResult() {
+                  context.go('/election-detail/$id/$userId/result');
                 }
 
                 if (state.status == ElectionStatusEnum.voteOpen || state.status == ElectionStatusEnum.voteEnding) {
@@ -51,6 +56,16 @@ class ElectionDashboard extends StatelessWidget {
                       onPressed: goVote,
                       child: const Text('Start voting'),
                     ),
+                  );
+                } else if (state.status == ElectionStatusEnum.voted) {
+                  return const Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: ElevatedButton(onPressed: null, child: Text('See result')),
+                  );
+                } else if (state.status == ElectionStatusEnum.voteClosed) {
+                  return Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: ElevatedButton(onPressed: goSeeResult, child: const Text('See result')),
                   );
                 } else {
                   return const Padding(
@@ -94,7 +109,7 @@ class ElectionDashboard extends StatelessWidget {
                     return const CircularProgressIndicator(color: Colors.blue);
                   } else if (state is ElectionOverviewLoaded) {
                     bool castedStatus = state.status == ElectionStatusEnum.voted || state.status == ElectionStatusEnum.voteClosed;
-                    return castedStatus ? const VoteCasted() : const SizedBox();
+                    return castedStatus ? VoteCasted(id: id) : const SizedBox();
                   } else {
                     return const Text('Something is wrong');
                   }
@@ -147,8 +162,11 @@ class ElectionDescription extends StatelessWidget {
 }
 
 class VoteCasted extends StatelessWidget {
+  final String id;
+
   const VoteCasted({
     Key? key,
+    required this.id,
   }) : super(key: key);
 
   @override
@@ -172,7 +190,16 @@ class VoteCasted extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
             ),
           ),
-          const VoteChoiceRow(title: 'Susan Matthew'),
+          BlocBuilder<LoggedUserBloc, LoggedUserState>(
+            builder: (context, state) {
+              if (state is LoggedUserLoaded) {
+                final Election election = Election.elections[int.parse(id)];
+                return VoteChoiceRow(title: state.user.votedChoices[election]?.title);
+              } else {
+                return const Text('There is something wrong');
+              }
+            },
+          ),
           Container(
             margin: const EdgeInsets.only(top: 10, bottom: 10),
             child: const Text(
@@ -259,7 +286,7 @@ class VotingOptions extends StatelessWidget {
 }
 
 class VoteChoiceRow extends StatelessWidget {
-  final String title;
+  final String? title;
 
   const VoteChoiceRow({
     required this.title,
@@ -279,7 +306,7 @@ class VoteChoiceRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(title),
+          Text(title == null ? 'Null value given' : title!),
           IconButton(
               onPressed: () {
                 debugPrint('Open info about a choice');

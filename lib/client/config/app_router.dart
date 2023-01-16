@@ -46,13 +46,13 @@ GoRouter appRouter = GoRouter(
             GoRoute(
                 path: 'voting',
                 builder: (BuildContext context, GoRouterState state) {
-                  return Voting(id: state.params['electionId']!);
+                  return Voting(id: state.params['electionId']!, userId: state.params['userId']!);
                 },
                 routes: [
                   GoRoute(
                     path: 'voting-casted',
                     builder: (BuildContext context, GoRouterState state) {
-                      return VotingCasted(id: state.params['electionId']!);
+                      return VotingCasted(id: state.params['electionId']!, userId: state.params['userId']!);
                     },
                   )
                 ])

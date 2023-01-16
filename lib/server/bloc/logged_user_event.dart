@@ -9,3 +9,10 @@ class LoginLoggedUserEvent extends LoggedUserEvent {
 
   const LoginLoggedUserEvent({required this.userId});
 }
+
+class ConfirmVoteLoggedUserEvent extends LoggedUserEvent {
+  final Choice choice;
+  final String id;
+
+  const ConfirmVoteLoggedUserEvent({required this.choice, required this.id});
+}

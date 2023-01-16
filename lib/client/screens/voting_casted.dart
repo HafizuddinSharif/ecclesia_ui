@@ -8,8 +8,9 @@ import 'package:go_router/go_router.dart';
 
 class VotingCasted extends StatelessWidget {
   final String id;
+  final String userId;
 
-  const VotingCasted({Key? key, required this.id}) : super(key: key);
+  const VotingCasted({Key? key, required this.id, required this.userId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class VotingCasted extends StatelessWidget {
             children: [
               ElevatedButton(
                 onPressed: () {
-                  context.go('/election-detail/$id');
+                  context.go('/election-detail/$id/$userId');
                   // debugPrint("Going to election detail with id ");
                 },
                 style: ButtonStyle(

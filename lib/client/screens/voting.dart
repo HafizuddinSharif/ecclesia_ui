@@ -3,9 +3,9 @@ import 'package:ecclesia_ui/client/widgets/custom_drawer.dart';
 import 'package:ecclesia_ui/client/widgets/custom_radio_list_tile.dart';
 import 'package:ecclesia_ui/data/models/choice_model.dart';
 import 'package:ecclesia_ui/data/models/election_overview_model.dart';
-import 'package:ecclesia_ui/data/models/voter_model.dart';
 import 'package:ecclesia_ui/server/bloc/election_overview_bloc.dart';
 import 'package:ecclesia_ui/server/bloc/joined_elections_bloc.dart';
+import 'package:ecclesia_ui/server/bloc/logged_user_bloc.dart';
 import 'package:ecclesia_ui/server/bloc/picked_choice_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,7 +13,8 @@ import 'package:go_router/go_router.dart';
 
 class Voting extends StatefulWidget {
   final String id;
-  const Voting({Key? key, required this.id}) : super(key: key);
+  final String userId;
+  const Voting({Key? key, required this.id, required this.userId}) : super(key: key);
 
   @override
   State<Voting> createState() => _VotingState();
@@ -22,10 +23,12 @@ class Voting extends StatefulWidget {
 class _VotingState extends State<Voting> {
   bool hasChosen = false;
   String _chosenOptions = "";
+  Choice selectedChoice = Choice.noVote;
 
   void changeSelection(value, choice) {
     setState(() {
       _chosenOptions = value;
+      selectedChoice = choice;
     });
 
     context.read<PickedChoiceBloc>().add(ChoosePickedChoice(choice: choice));
@@ -57,7 +60,10 @@ class _VotingState extends State<Voting> {
           value: BlocProvider.of<PickedChoiceBloc>(context),
         ),
         BlocProvider.value(
-          value: BlocProvider.of<JoinedElectionsBloc>(context)..add(LoadJoinedElection(user: Voter.voters[0])),
+          value: BlocProvider.of<JoinedElectionsBloc>(context),
+        ),
+        BlocProvider.value(
+          value: BlocProvider.of<LoggedUserBloc>(context),
         ),
       ],
       child: Scaffold(
@@ -86,8 +92,9 @@ class _VotingState extends State<Voting> {
                         onPressed: () {
                           context.read<ElectionOverviewBloc>().add(ChangeElectionOverview(election: state.election, status: ElectionStatusEnum.voted));
                           context.read<JoinedElectionsBloc>().add(UpdateStatusJoinedElection(election: state.election, status: ElectionStatusEnum.voted));
-                          // TODO: Implement confirm ballot cast
-                          context.go("/election-detail/${widget.id}/voting/voting-casted");
+                          context.read<LoggedUserBloc>().add(ConfirmVoteLoggedUserEvent(choice: selectedChoice, id: widget.id));
+
+                          context.go("/election-detail/${widget.id}/${widget.userId}/voting/voting-casted");
                           debugPrint('Confirm ballot! with id ${widget.id}');
                         },
                         child: const Text('I cast my vote!'),
