@@ -18,7 +18,6 @@ class ElectionOverviewBloc extends Bloc<ElectionOverviewEvent, ElectionOverviewS
         final state = this.state as ElectionOverviewLoaded;
 
         if (state.id != event.id) {
-          print("Not the same, ${state.id}, ${event.id}");
           int id = int.parse(event.id);
           Election election = Election.elections[id];
           ElectionStatusEnum status = user.joinedElections[election]!;
@@ -27,7 +26,6 @@ class ElectionOverviewBloc extends Bloc<ElectionOverviewEvent, ElectionOverviewS
           emit(ElectionOverviewLoaded(election: state.election, status: state.status, id: event.id));
         }
       } else {
-        print("Wowww");
         int id = int.parse(event.id);
         Election election = Election.elections[id];
         ElectionStatusEnum status = user.joinedElections[election]!;

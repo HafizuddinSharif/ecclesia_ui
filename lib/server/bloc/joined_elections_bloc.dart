@@ -13,11 +13,9 @@ class JoinedElectionsBloc extends Bloc<JoinedElectionsEvent, JoinedElectionsStat
       (event, emit) async {
         var user = int.parse(event.user.id); // To change the user of the app, just change the index value of the voter here.
         if (state is JoinedElectionsLoaded) {
-          print("Happen here");
           final state = this.state as JoinedElectionsLoaded;
           emit(JoinedElectionsLoaded(elections: state.elections));
         } else {
-          print("Still here");
           await Future<void>.delayed(const Duration(seconds: 2));
           emit(JoinedElectionsLoaded(elections: Voter.voters[user].joinedElections));
         }
@@ -25,11 +23,9 @@ class JoinedElectionsBloc extends Bloc<JoinedElectionsEvent, JoinedElectionsStat
     );
     on<UpdateStatusJoinedElection>(
       (event, emit) {
-        print("Yeett");
         if (state is JoinedElectionsLoaded) {
           final state = this.state as JoinedElectionsLoaded;
           state.elections[event.election] = event.status;
-          print(event.election.title);
           emit(
             JoinedElectionsLoaded(
               elections: state.elections,

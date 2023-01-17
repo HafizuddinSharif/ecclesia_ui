@@ -19,7 +19,6 @@ class LoggedUserBloc extends Bloc<LoggedUserEvent, LoggedUserState> {
         final Election election = Election.elections[int.parse(event.id)];
 
         user.votedChoices[election] = event.choice;
-        print("This election is voted on ${event.choice.title}");
         emit(LoggedUserLoaded(user: user));
       }
     });
