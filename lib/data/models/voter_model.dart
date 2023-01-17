@@ -48,7 +48,7 @@ class Voter extends Equatable {
         Election.elections[2]: ElectionStatusEnum.registeringDetails,
       },
       votedChoices: {
-        Election.elections[0]: Choice.noVote,
+        Election.elections[0]: Choice.personChoice[0],
         Election.elections[1]: Choice.noVote,
         Election.elections[3]: Choice.noVote,
       },

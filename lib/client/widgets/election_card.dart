@@ -71,6 +71,7 @@ class ElectionCard extends StatelessWidget {
                           padding: MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.all(0)),
                         ),
                         onPressed: () {
+                          context.go('/election-detail/$id/$userId/result');
                           debugPrint('Viewing result here');
                         },
                         child: const Text('Click here to view result',
