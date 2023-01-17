@@ -1,4 +1,3 @@
-import 'package:ecclesia_ui/data/models/election_card_model.dart';
 import 'package:ecclesia_ui/data/models/election_model.dart';
 import 'package:ecclesia_ui/data/models/election_overview_model.dart';
 import 'package:ecclesia_ui/client/widgets/custom_appbar.dart';
@@ -11,16 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Home extends StatelessWidget {
-  final List electionListDummy = [
-    ElectionCardModel('Best cookie (Nov)', 'Description will be placed here', 'Edinburgh Baking Society', ElectionStatusEnum.voteOpen),
-    ElectionCardModel('Social Meetup (Dec)', 'Description will be placed here', 'Edinburgh Baking Society', ElectionStatusEnum.voteNotOpen),
-    ElectionCardModel('Quiz Night', 'Description will be placed here', 'Edinburgh Baking Society', ElectionStatusEnum.voteEnding),
-    ElectionCardModel('Where to hike?', 'Description will be placed here', 'Edinburgh Baking Society', ElectionStatusEnum.voted),
-  ];
-
   final Voter user;
 
-  Home({
+  const Home({
     Key? key,
     required this.user,
   }) : super(key: key);
