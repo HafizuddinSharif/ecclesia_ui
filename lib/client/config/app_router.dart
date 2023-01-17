@@ -4,6 +4,7 @@ import 'package:ecclesia_ui/client/screens/past_elections.dart';
 import 'package:ecclesia_ui/client/screens/register_camera.dart';
 import 'package:ecclesia_ui/client/screens/register_confirmation.dart';
 import 'package:ecclesia_ui/client/screens/register_organization.dart';
+import 'package:ecclesia_ui/client/screens/result.dart';
 import 'package:ecclesia_ui/client/screens/voting.dart';
 import 'package:ecclesia_ui/client/screens/voting_casted.dart';
 import 'package:ecclesia_ui/server/bloc/logged_user_bloc.dart';
@@ -16,7 +17,7 @@ GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/',
       builder: (context, state) => BlocProvider.value(
-        value: BlocProvider.of<LoggedUserBloc>(context)..add(const LoginLoggedUserEvent(userId: "0")),
+        value: BlocProvider.of<LoggedUserBloc>(context)..add(const LoginLoggedUserEvent(userId: "1")),
         child: BlocBuilder<LoggedUserBloc, LoggedUserState>(
           builder: (context, state) {
             if (state is LoggedUserLoaded) {
@@ -55,7 +56,13 @@ GoRouter appRouter = GoRouter(
                       return VotingCasted(id: state.params['electionId']!, userId: state.params['userId']!);
                     },
                   )
-                ])
+                ]),
+            // Result
+            GoRoute(
+                path: 'result',
+                builder: (BuildContext context, GoRouterState state) {
+                  return Result(id: state.params['electionId']!, userId: state.params['userId']!);
+                })
           ],
         ),
         // Register to an organization
