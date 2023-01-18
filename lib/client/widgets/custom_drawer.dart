@@ -26,7 +26,7 @@ class CustomDrawer extends StatelessWidget {
           ListTile(
             title: const Text('Register to an election'),
             onTap: () {
-              context.go('/register-organization');
+              context.go('/register-election');
               Scaffold.of(context).closeEndDrawer();
             },
           ),

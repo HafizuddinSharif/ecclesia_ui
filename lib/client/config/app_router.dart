@@ -3,7 +3,8 @@ import 'package:ecclesia_ui/client/screens/election_dashboard.dart';
 import 'package:ecclesia_ui/client/screens/past_elections.dart';
 import 'package:ecclesia_ui/client/screens/register_camera.dart';
 import 'package:ecclesia_ui/client/screens/register_confirmation.dart';
-import 'package:ecclesia_ui/client/screens/register_organization.dart';
+import 'package:ecclesia_ui/client/screens/register_confirmed.dart';
+import 'package:ecclesia_ui/client/screens/register_page.dart';
 import 'package:ecclesia_ui/client/screens/result.dart';
 import 'package:ecclesia_ui/client/screens/voting.dart';
 import 'package:ecclesia_ui/client/screens/voting_casted.dart';
@@ -69,15 +70,26 @@ GoRouter appRouter = GoRouter(
         GoRoute(
           path: 'register-organization',
           builder: (BuildContext context, GoRouterState state) {
-            return const RegisterOrganization();
+            return const RegisterPage(isElection: false);
           },
           routes: [
             GoRoute(
-              path: 'confirmation',
-              builder: (BuildContext context, GoRouterState state) {
-                return const RegisterConfirmation();
-              },
-            ),
+                path: 'confirmation',
+                builder: (BuildContext context, GoRouterState state) {
+                  return const RegisterConfirmation(
+                    isElection: false,
+                  );
+                },
+                routes: [
+                  GoRoute(
+                    path: 'confirmed',
+                    builder: (BuildContext context, GoRouterState state) {
+                      return const RegisterConfirmed(
+                        isElection: false,
+                      );
+                    },
+                  ),
+                ]),
             GoRoute(
               path: 'camera',
               builder: (BuildContext context, GoRouterState state) {
@@ -90,15 +102,22 @@ GoRouter appRouter = GoRouter(
         GoRoute(
           path: 'register-election',
           builder: (BuildContext context, GoRouterState state) {
-            return const RegisterOrganization();
+            return const RegisterPage(isElection: true);
           },
           routes: [
             GoRoute(
-              path: 'confirmation',
-              builder: (BuildContext context, GoRouterState state) {
-                return const RegisterConfirmation();
-              },
-            ),
+                path: 'confirmation',
+                builder: (BuildContext context, GoRouterState state) {
+                  return const RegisterConfirmation(isElection: true);
+                },
+                routes: [
+                  GoRoute(
+                    path: 'confirmed',
+                    builder: (BuildContext context, GoRouterState state) {
+                      return const RegisterConfirmed(isElection: true);
+                    },
+                  ),
+                ]),
             GoRoute(
               path: 'camera',
               builder: (BuildContext context, GoRouterState state) {

@@ -16,3 +16,9 @@ class ConfirmVoteLoggedUserEvent extends LoggedUserEvent {
 
   const ConfirmVoteLoggedUserEvent({required this.choice, required this.id});
 }
+
+class JoinElectionLoggedUserEvent extends LoggedUserEvent {
+  final String id;
+
+  const JoinElectionLoggedUserEvent({required this.id});
+}

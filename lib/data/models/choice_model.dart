@@ -28,5 +28,11 @@ class Choice extends Equatable {
     const Choice(id: '2', title: 'Tikka Masala', description: 'An indian dish, but actually from the UK.', numberOfVote: 0),
   ];
 
+  static List<Choice> pubChoice = [
+    const Choice(id: '0', title: 'Pear tree', description: 'Pretty close to George Square', numberOfVote: 0),
+    const Choice(id: '1', title: '32 Below', description: 'Just in front of Bing Tea.', numberOfVote: 0),
+    const Choice(id: '2', title: 'Southsider', description: 'Beside Farmfood in Nicholson street.', numberOfVote: 0),
+  ];
+
   static Choice noVote = const Choice(id: 'NULL', title: "No vote", description: "", numberOfVote: 0);
 }

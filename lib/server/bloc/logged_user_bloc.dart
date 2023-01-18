@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:ecclesia_ui/data/models/choice_model.dart';
 import 'package:ecclesia_ui/data/models/election_model.dart';
+import 'package:ecclesia_ui/data/models/election_overview_model.dart';
 import 'package:ecclesia_ui/data/models/voter_model.dart';
 
 part 'logged_user_event.dart';
@@ -20,6 +21,13 @@ class LoggedUserBloc extends Bloc<LoggedUserEvent, LoggedUserState> {
 
         user.votedChoices[election] = event.choice;
         emit(LoggedUserLoaded(user: user));
+      }
+    });
+    on<JoinElectionLoggedUserEvent>((event, emit) {
+      if (state is LoggedUserLoaded) {
+        final state = this.state as LoggedUserLoaded;
+        state.user.joinedElections[Election.elections[int.parse(event.id)]] = ElectionStatusEnum.registeringDetails;
+        emit(LoggedUserLoaded(user: state.user));
       }
     });
   }

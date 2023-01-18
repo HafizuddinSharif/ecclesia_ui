@@ -53,5 +53,14 @@ class Election extends Equatable {
       endTime: DateTime.parse("2022-04-25"),
       choices: Choice.personChoice,
     ),
+    Election(
+      id: '4',
+      title: 'Club socials',
+      description: 'This is for the description of the election. It can be long if needed.',
+      organization: 'Edinburgh Baking Society',
+      startTime: DateTime.parse("2023-02-15"),
+      endTime: DateTime.parse("2023-02-25"),
+      choices: Choice.pubChoice,
+    )
   ];
 }

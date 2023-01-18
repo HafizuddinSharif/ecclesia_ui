@@ -6,14 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
-class RegisterOrganization extends StatefulWidget {
-  const RegisterOrganization({Key? key}) : super(key: key);
+class RegisterPage extends StatefulWidget {
+  final bool isElection;
+  const RegisterPage({Key? key, required this.isElection}) : super(key: key);
 
   @override
-  State<RegisterOrganization> createState() => _RegisterOrganizationState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _RegisterOrganizationState extends State<RegisterOrganization> {
+class _RegisterPageState extends State<RegisterPage> {
   XFile? _image;
 
   Future getImage(bool isCamera) async {
@@ -92,8 +93,8 @@ class _RegisterOrganizationState extends State<RegisterOrganization> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        const Text(
-                          'Register to an organization by:',
+                        Text(
+                          widget.isElection ? 'Register to an election by:' : 'Register to an organization by:',
                           textAlign: TextAlign.center,
                         ),
                         Container(
@@ -113,7 +114,11 @@ class _RegisterOrganizationState extends State<RegisterOrganization> {
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            context.go('/register-organization/register-organization-confirmation');
+                            if (widget.isElection) {
+                              context.go('/register-election/confirmation');
+                            } else {
+                              context.go('/register-organization/confirmation');
+                            }
                           },
                           child: const Text('Register'),
                         ),
