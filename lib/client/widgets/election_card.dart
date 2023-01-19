@@ -53,7 +53,7 @@ class ElectionCard extends StatelessWidget {
                 // Title for card
                 Text(electionTitle,
                     style: const TextStyle(
-                      fontSize: 18.0,
+                      fontSize: 16,
                       fontWeight: FontWeight.w700,
                     )),
                 StatusTag(status: status),

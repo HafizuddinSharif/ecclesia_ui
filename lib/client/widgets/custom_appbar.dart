@@ -14,7 +14,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     required this.disableMenu,
     required this.disableBackGuard,
     Key? key,
-  })  : preferredSize = const Size.fromHeight(100.0),
+  })  : preferredSize = const Size.fromHeight(80.0),
         super(key: key);
 
   @override
@@ -64,8 +64,8 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                 }
               },
               child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                margin: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                padding: const EdgeInsets.symmetric(horizontal: 0.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   color: Colors.black,
@@ -87,8 +87,8 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                   debugPrint('Menu open!');
                 },
                 child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
                     color: Colors.black,

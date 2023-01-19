@@ -25,6 +25,7 @@ class StatusTag extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
+          width: 100,
           padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 10.0),
           alignment: Alignment.center,
           decoration: BoxDecoration(
@@ -33,8 +34,9 @@ class StatusTag extends StatelessWidget {
           ),
           child: Text(
             electionCardOptions[status]!.statusTitle,
+            textAlign: TextAlign.center,
             style: const TextStyle(
-              fontSize: 12,
+              fontSize: 10,
               color: Colors.white,
             ),
           ),

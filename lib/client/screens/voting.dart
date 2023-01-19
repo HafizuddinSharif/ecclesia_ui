@@ -254,6 +254,9 @@ class VotingPicker extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 15),
                 child: Column(children: [
                   const Text('Select your choice to vote for:'),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   Text(
                     state.election.title,
                     style: const TextStyle(
@@ -263,7 +266,7 @@ class VotingPicker extends StatelessWidget {
                   ),
                 ]),
               ),
-              Flexible(
+              Expanded(
                 child: ListView.builder(
                     itemCount: state.election.choices.length,
                     itemBuilder: (_, index) {

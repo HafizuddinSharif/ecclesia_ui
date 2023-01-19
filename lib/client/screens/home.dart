@@ -33,44 +33,46 @@ class Home extends StatelessWidget {
           appBar: const CustomAppBar(back: false, disableBackGuard: false, disableMenu: false),
           endDrawer: const CustomDrawer(),
           body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                child: Column(children: [
-                  Container(
-                    height: 60,
-                    padding: const EdgeInsets.all(8.0),
-                    child: const TextField(
-                        decoration: InputDecoration(
-                      labelText: 'Type here to search',
-                      suffixIcon: Icon(Icons.search),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(6)),
-                        borderSide: BorderSide(width: 0, color: Colors.white),
-                      ),
-                      fillColor: Color.fromARGB(255, 217, 217, 217),
-                      filled: true,
-                      suffixIconColor: Color.fromARGB(255, 255, 255, 255),
-                      labelStyle: TextStyle(color: Colors.black),
-                    )),
-                  ),
-                ]),
-              ),
+              // Container(
+              //   margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+              //   child: Container(
+              //     height: 60,
+              //     padding: const EdgeInsets.all(8.0),
+              //     child: const TextField(
+              //         decoration: InputDecoration(
+              //       labelText: 'Type here to search',
+              //       suffixIcon: Icon(Icons.search),
+              //       enabledBorder: OutlineInputBorder(
+              //         borderRadius: BorderRadius.all(Radius.circular(6)),
+              //         borderSide: BorderSide(width: 0, color: Colors.white),
+              //       ),
+              //       fillColor: Color.fromARGB(255, 217, 217, 217),
+              //       filled: true,
+              //       suffixIconColor: Color.fromARGB(255, 255, 255, 255),
+              //       labelStyle: TextStyle(color: Colors.black),
+              //     )),
+              //   ),
+              // ),
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: Column(children: [
                   const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10.0),
+                    padding: EdgeInsets.symmetric(vertical: 5.0),
                     child: Text(
                       'Just ended:',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
                     ),
                   ),
                   BlocBuilder<ElectionJustEndedBloc, ElectionJustEndedState>(
                     builder: (context, state) {
                       if (state is ElectionJustEndedInitial) {
-                        return const CircularProgressIndicator(
-                          color: Colors.blue,
+                        return const Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.blue,
+                          ),
                         );
                       } else if (state is ElectionJustEndedLoaded) {
                         return ElectionCard(id: state.election.id, electionTitle: state.election.title, electionDescription: state.election.description, electionOrganization: state.election.organization, status: state.status, userId: user.id);
@@ -85,10 +87,10 @@ class Home extends StatelessWidget {
                 // margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                 child: Column(children: [
                   const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10.0),
+                    padding: EdgeInsets.symmetric(vertical: 5.0),
                     child: Text(
                       'Active joined election(s):',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
                     ),
                   ),
                   BlocBuilder<JoinedElectionsBloc, JoinedElectionsState>(
