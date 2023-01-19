@@ -23,10 +23,14 @@ class LoggedUserBloc extends Bloc<LoggedUserEvent, LoggedUserState> {
         emit(LoggedUserLoaded(user: user));
       }
     });
-    on<JoinElectionLoggedUserEvent>((event, emit) {
+    on<JoinElectionLoggedUserEvent>((event, emit) async {
       if (state is LoggedUserLoaded) {
         final state = this.state as LoggedUserLoaded;
         state.user.joinedElections[Election.elections[int.parse(event.id)]] = ElectionStatusEnum.registeringDetails;
+        emit(LoggedUserLoaded(user: state.user));
+
+        await Future<void>.delayed(const Duration(seconds: 10));
+        state.user.joinedElections[Election.elections[int.parse(event.id)]] = ElectionStatusEnum.voteNotOpen;
         emit(LoggedUserLoaded(user: state.user));
       }
     });
