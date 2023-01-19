@@ -1,3 +1,4 @@
+import 'package:ecclesia_ui/client/screens/choice_info.dart';
 import 'package:ecclesia_ui/client/screens/home.dart';
 import 'package:ecclesia_ui/client/screens/election_dashboard.dart';
 import 'package:ecclesia_ui/client/screens/past_elections.dart';
@@ -60,9 +61,15 @@ GoRouter appRouter = GoRouter(
                 ]),
             // Result
             GoRoute(
-                path: 'result',
+              path: 'result',
+              builder: (BuildContext context, GoRouterState state) {
+                return Result(id: state.params['electionId']!, userId: state.params['userId']!);
+              },
+            ),
+            GoRoute(
+                path: 'info/:choiceId',
                 builder: (BuildContext context, GoRouterState state) {
-                  return Result(id: state.params['electionId']!, userId: state.params['userId']!);
+                  return ChoiceInfo(id: state.params['electionId']!, userId: state.params['userId']!, choiceId: state.params['choiceId']!);
                 })
           ],
         ),

@@ -1,4 +1,5 @@
 import 'package:ecclesia_ui/client/config/app_router.dart';
+import 'package:ecclesia_ui/server/bloc/choice_view_bloc.dart';
 import 'package:ecclesia_ui/server/bloc/election_just_ended_bloc.dart';
 import 'package:ecclesia_ui/server/bloc/election_overview_bloc.dart';
 import 'package:ecclesia_ui/server/bloc/joined_elections_bloc.dart';
@@ -23,6 +24,9 @@ void main() {
     ),
     BlocProvider<LoggedUserBloc>(
       create: (context) => LoggedUserBloc(),
+    ),
+    BlocProvider<ChoiceViewBloc>(
+      create: (context) => ChoiceViewBloc(),
     ),
   ], child: const MyApp()));
 }

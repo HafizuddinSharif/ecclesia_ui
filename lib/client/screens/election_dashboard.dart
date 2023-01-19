@@ -102,14 +102,14 @@ class ElectionDashboard extends StatelessWidget {
                 },
               ),
               const ElectionDescription(),
-              const VotingOptions(),
+              VotingOptions(id: id, userId: userId),
               BlocBuilder<ElectionOverviewBloc, ElectionOverviewState>(
                 builder: (context, state) {
                   if (state is ElectionOverviewInitial) {
                     return const CircularProgressIndicator(color: Colors.blue);
                   } else if (state is ElectionOverviewLoaded) {
                     bool castedStatus = state.status == ElectionStatusEnum.voted || state.status == ElectionStatusEnum.voteClosed;
-                    return castedStatus ? VoteCasted(id: id) : const SizedBox();
+                    return castedStatus ? VoteCasted(id: id, userId: userId) : const SizedBox();
                   } else {
                     return const Text('Something is wrong');
                   }
@@ -162,11 +162,13 @@ class ElectionDescription extends StatelessWidget {
 }
 
 class VoteCasted extends StatelessWidget {
+  final String userId;
   final String id;
 
   const VoteCasted({
     Key? key,
     required this.id,
+    required this.userId,
   }) : super(key: key);
 
   @override
@@ -194,7 +196,7 @@ class VoteCasted extends StatelessWidget {
             builder: (context, state) {
               if (state is LoggedUserLoaded) {
                 final Election election = Election.elections[int.parse(id)];
-                return VoteChoiceRow(title: state.user.votedChoices[election]?.title);
+                return VoteChoiceRow(choice: state.user.votedChoices[election], id: id, userId: userId);
               } else {
                 return const Text('There is something wrong');
               }
@@ -235,8 +237,13 @@ class VoteCasted extends StatelessWidget {
 }
 
 class VotingOptions extends StatelessWidget {
+  final String id;
+  final String userId;
+
   const VotingOptions({
     Key? key,
+    required this.id,
+    required this.userId,
   }) : super(key: key);
 
   @override
@@ -266,7 +273,7 @@ class VotingOptions extends StatelessWidget {
                 return const CircularProgressIndicator(color: Colors.blue);
               } else if (state is ElectionOverviewLoaded) {
                 Iterable<VoteChoiceRow> rows = state.election.choices.map(
-                  (e) => VoteChoiceRow(title: e.title),
+                  (choice) => VoteChoiceRow(choice: choice, id: id, userId: userId),
                 );
                 return Column(children: rows.toList(growable: false));
                 // return Column(children: const [
@@ -286,10 +293,14 @@ class VotingOptions extends StatelessWidget {
 }
 
 class VoteChoiceRow extends StatelessWidget {
-  final String? title;
+  final Choice? choice;
+  final String id;
+  final String userId;
 
   const VoteChoiceRow({
-    required this.title,
+    required this.choice,
+    required this.id,
+    required this.userId,
     Key? key,
   }) : super(key: key);
 
@@ -306,9 +317,10 @@ class VoteChoiceRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(title == null ? 'Null value given' : title!),
+          Text(choice!.title == null ? 'Null value given' : choice!.title),
           IconButton(
               onPressed: () {
+                context.go('/election-detail/$id/$userId/info/${choice!.id}');
                 debugPrint('Open info about a choice');
               },
               icon: const Icon(Icons.info))
