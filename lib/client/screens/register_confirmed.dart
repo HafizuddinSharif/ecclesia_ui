@@ -1,6 +1,7 @@
 import 'package:ecclesia_ui/client/widgets/custom_appbar.dart';
 import 'package:ecclesia_ui/client/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class RegisterConfirmed extends StatelessWidget {
   final bool isElection;
@@ -11,6 +12,25 @@ class RegisterConfirmed extends StatelessWidget {
     return Scaffold(
       appBar: const CustomAppBar(back: false, disableBackGuard: true, disableMenu: false),
       endDrawer: const CustomDrawer(),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                context.go('/');
+                // debugPrint("Going to election detail with id ");
+              },
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.black),
+              ),
+              child: const Text('Go back home'),
+            ),
+          ],
+        ),
+      ),
       body: Center(
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0),

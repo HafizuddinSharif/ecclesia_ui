@@ -2,6 +2,7 @@ import 'package:ecclesia_ui/client/widgets/custom_appbar.dart';
 import 'package:ecclesia_ui/client/widgets/custom_drawer.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class Result extends StatelessWidget {
   final String id;
@@ -46,11 +47,30 @@ class Result extends StatelessWidget {
         disableMenu: false,
       ),
       endDrawer: const CustomDrawer(),
-      body: Center(
-        child: Column(children: [
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                context.go('/');
+                // debugPrint("Going to election detail with id ");
+              },
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.black),
+              ),
+              child: const Text('Go back home'),
+            ),
+          ],
+        ),
+      ),
+      body: ListView(
+        children: [
           const ElectionResult(),
           GraphElection(data: data),
-        ]),
+        ],
       ),
     );
   }
@@ -106,77 +126,75 @@ class GraphElection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0),
-        margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12.0), boxShadow: [
-          BoxShadow(
-              color: const Color.fromARGB(255, 211, 211, 211).withOpacity(0.5), //color of shadow
-              spreadRadius: 3, //spread radius
-              blurRadius: 7, // blur radius
-              offset: const Offset(0, 6)),
-        ]),
-        child: Flex(
-          direction: Axis.vertical,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(bottom: 10),
-              child: const Text(
-                'Result Breakdown',
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
-              ),
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0),
+      margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12.0), boxShadow: [
+        BoxShadow(
+            color: const Color.fromARGB(255, 211, 211, 211).withOpacity(0.5), //color of shadow
+            spreadRadius: 3, //spread radius
+            blurRadius: 7, // blur radius
+            offset: const Offset(0, 6)),
+      ]),
+      child: Column(
+        // direction: Axis.vertical,
+        children: [
+          Container(
+            margin: const EdgeInsets.only(bottom: 10),
+            child: const Text(
+              'Result Breakdown',
+              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
             ),
-            Row(
-              children: const [
-                Icon(Icons.circle, color: Colors.blue),
-                SizedBox(width: 10),
-                Text('James Cameron'),
-              ],
-            ),
-            Row(
-              children: const [
-                Icon(Icons.circle, color: Colors.red),
-                SizedBox(width: 10),
-                Text('Susan Matthew'),
-              ],
-            ),
-            Row(
-              children: const [
-                Icon(Icons.circle, color: Colors.orange),
-                SizedBox(width: 10),
-                Text('Yanning Li'),
-              ],
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            Expanded(
-              // margin: const EdgeInsets.only(bottom: 10),
-              child: BarChart(
-                BarChartData(
-                  barGroups: data,
-                  titlesData: FlTitlesData(
-                    show: true,
-                    rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                    leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: true)),
-                    topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                    bottomTitles: AxisTitles(
-                      sideTitles: SideTitles(
-                        reservedSize: 40,
-                        showTitles: false,
-                      ),
+          ),
+          Row(
+            children: const [
+              Icon(Icons.circle, color: Colors.blue),
+              SizedBox(width: 10),
+              Text('James Cameron'),
+            ],
+          ),
+          Row(
+            children: const [
+              Icon(Icons.circle, color: Colors.red),
+              SizedBox(width: 10),
+              Text('Susan Matthew'),
+            ],
+          ),
+          Row(
+            children: const [
+              Icon(Icons.circle, color: Colors.orange),
+              SizedBox(width: 10),
+              Text('Yanning Li'),
+            ],
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          SizedBox(
+            height: 300,
+            child: BarChart(
+              BarChartData(
+                barGroups: data,
+                titlesData: FlTitlesData(
+                  show: true,
+                  rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                  leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: true, reservedSize: 30)),
+                  topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                  bottomTitles: AxisTitles(
+                    sideTitles: SideTitles(
+                      reservedSize: 40,
+                      showTitles: false,
                     ),
                   ),
                 ),
               ),
             ),
-            Container(
-              padding: const EdgeInsets.all(10.0),
-              child: const Text('57 out of 60 registered voter has voted.'),
-            ),
-          ],
-        ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(10.0),
+            child: const Text('57 out of 60 registered voter has voted.'),
+          ),
+        ],
       ),
     );
   }
