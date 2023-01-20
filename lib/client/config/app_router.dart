@@ -9,6 +9,7 @@ import 'package:ecclesia_ui/client/screens/register_page.dart';
 import 'package:ecclesia_ui/client/screens/result.dart';
 import 'package:ecclesia_ui/client/screens/voting.dart';
 import 'package:ecclesia_ui/client/screens/voting_casted.dart';
+import 'package:ecclesia_ui/client/screens/welcome.dart';
 import 'package:ecclesia_ui/server/bloc/logged_user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,8 +25,9 @@ GoRouter appRouter = GoRouter(
           builder: (context, state) {
             if (state is LoggedUserLoaded) {
               return Home(user: state.user);
+              // return const Welcome();
             } else {
-              return const CircularProgressIndicator(color: Colors.blue);
+              return const Welcome();
             }
           },
         ),
@@ -34,9 +36,11 @@ GoRouter appRouter = GoRouter(
         // Past Elections
         GoRoute(
           path: 'past-elections',
-          builder: (BuildContext context, GoRouterState state) {
-            return const PastElections();
-          },
+          builder: (context, state) => const PastElections(),
+          // pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(context: context, state: state, child: const PastElections()),
+          // builder: (BuildContext context, GoRouterState state) {
+          //   return const PastElections();
+          // },
         ),
         // Election Detail
         GoRoute(
@@ -44,6 +48,7 @@ GoRouter appRouter = GoRouter(
           builder: (BuildContext context, GoRouterState state) {
             return ElectionDashboard(id: state.params['electionId']!, userId: state.params['userId']!);
           },
+          // pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(context: context, state: state, child: ElectionDashboard(id: state.params['electionId']!, userId: state.params['userId']!)),
           routes: <GoRoute>[
             // Voting
             GoRoute(
@@ -137,3 +142,39 @@ GoRouter appRouter = GoRouter(
     ),
   ],
 );
+
+CustomTransitionPage<void> animationHelperFunction(context, state, page) {
+  return CustomTransitionPage<void>(
+    key: state.pageKey,
+    child: page(),
+    transitionDuration: const Duration(milliseconds: 300),
+    transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+      // Change the opacity of the screen using a Curve based on the the animation's
+      // value
+      return FadeTransition(
+        opacity: CurveTween(curve: Curves.easeInOut).animate(animation),
+        child: child,
+      );
+    },
+  );
+}
+
+CustomTransitionPage buildPageWithDefaultTransition<T>({
+  required BuildContext context,
+  required GoRouterState state,
+  required Widget child,
+}) {
+  return CustomTransitionPage<void>(
+    key: state.pageKey,
+    child: child,
+    transitionDuration: const Duration(milliseconds: 300),
+    transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+      // Change the opacity of the screen using a Curve based on the the animation's
+      // value
+      return SlideTransition(
+        position: Tween(begin: const Offset(1.0, 0.0), end: const Offset(0.0, 0.0)).animate(animation),
+        child: child,
+      );
+    },
+  );
+}

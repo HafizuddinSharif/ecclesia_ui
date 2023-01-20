@@ -37,7 +37,7 @@ class Election extends Equatable {
     ),
     Election(
       id: '2',
-      title: 'Social Meetup (Dec)',
+      title: 'Social Meetup for the first time in a while (Dec)',
       description: 'This is for the description of the election. It can be long if needed',
       organization: 'Informatics 19/23',
       startTime: DateTime.parse("2022-04-15"),

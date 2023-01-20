@@ -317,7 +317,7 @@ class VoteChoiceRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(choice!.title == null ? 'Null value given' : choice!.title),
+          Text(choice!.title ?? 'Null value given'),
           IconButton(
               onPressed: () {
                 context.go('/election-detail/$id/$userId/info/${choice!.id}');
@@ -369,15 +369,24 @@ class ElectionStatus extends StatelessWidget {
             organization,
             style: const TextStyle(fontSize: 12),
           ),
-          Text(title,
-              style: const TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 20,
-              )),
+          SizedBox(
+            width: 300,
+            child: Text(title,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 20,
+                )),
+          ),
           const SizedBox(
             height: 10,
           ),
-          StatusTag(status: status),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              StatusTag(status: status),
+            ],
+          ),
           const SizedBox(
             height: 10,
           ),

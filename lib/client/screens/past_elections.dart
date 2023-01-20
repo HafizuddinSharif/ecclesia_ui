@@ -8,7 +8,7 @@ class PastElections extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-        appBar: CustomAppBar(back: true, disableBackGuard: false, disableMenu: false),
+        appBar: CustomAppBar(back: true, disableBackGuard: true, disableMenu: false),
         endDrawer: CustomDrawer(),
         body: Center(
           child: Text('This is past elections page!'),

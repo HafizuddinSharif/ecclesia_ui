@@ -25,7 +25,6 @@ class ElectionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // debugPrint('Container clicked!');
         context.go('/election-detail/$id/$userId');
       },
       child: Container(
@@ -48,15 +47,26 @@ class ElectionCard extends StatelessWidget {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Title for card
-                Text(electionTitle,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                    )),
-                StatusTag(status: status),
+                SizedBox(
+                  width: 200,
+                  child: Text(electionTitle,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                      )),
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width / 3,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      StatusTag(status: status),
+                    ],
+                  ),
+                ),
               ],
             ),
             Text(electionOrganization, style: const TextStyle(fontStyle: FontStyle.italic)),
