@@ -22,6 +22,7 @@ class StatusTag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 120,
       padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 10.0),
       alignment: Alignment.center,
       decoration: BoxDecoration(

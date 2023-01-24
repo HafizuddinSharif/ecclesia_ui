@@ -50,16 +50,14 @@ class ElectionCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Title for card
-                SizedBox(
-                  width: 200,
+                Expanded(
                   child: Text(electionTitle,
                       style: const TextStyle(
-                        fontSize: 16,
+                        fontSize: 15,
                         fontWeight: FontWeight.w700,
                       )),
                 ),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width / 3,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -69,7 +67,8 @@ class ElectionCard extends StatelessWidget {
                 ),
               ],
             ),
-            Text(electionOrganization, style: const TextStyle(fontStyle: FontStyle.italic)),
+            const SizedBox(height: 5),
+            Text(electionOrganization, style: const TextStyle(fontStyle: FontStyle.italic, fontSize: 12)),
             // Link to see result
             // Render only when vote has been closed
             (status != ElectionStatusEnum.voteClosed)
@@ -88,13 +87,14 @@ class ElectionCard extends StatelessWidget {
                             style: TextStyle(
                               color: Colors.blue,
                               decoration: TextDecoration.underline,
+                              fontSize: 12,
                             ))),
                   ),
-            Container(
-              height: 8,
+            const SizedBox(
+              height: 5,
             ),
             // Election description
-            Text(electionDescription, overflow: TextOverflow.ellipsis, maxLines: 2),
+            Text(electionDescription, overflow: TextOverflow.ellipsis, maxLines: 2, style: const TextStyle(fontSize: 12)),
           ],
         ),
       ),

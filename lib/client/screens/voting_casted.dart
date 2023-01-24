@@ -24,7 +24,7 @@ class _VotingCastedState extends State<VotingCasted> {
   void initState() {
     super.initState();
 
-    Future.delayed(const Duration(seconds: 10), () {
+    Future.delayed(const Duration(seconds: 5), () {
       setState(() {
         // Here you can write your code for open new view
         hasLoaded = true;
@@ -36,59 +36,62 @@ class _VotingCastedState extends State<VotingCasted> {
   Widget build(BuildContext context) {
     return BlocProvider.value(
       value: BlocProvider.of<PickedChoiceBloc>(context),
-      child: Scaffold(
-        backgroundColor: const Color.fromARGB(255, 246, 248, 250),
-        appBar: const CustomAppBar(
-          back: false,
-          disableBackGuard: true,
-          disableMenu: false,
-        ),
-        endDrawer: const CustomDrawer(),
-        bottomNavigationBar: !hasLoaded
-            ? Container()
-            : Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        context.go('/election-detail/${widget.id}/${widget.userId}');
-                        // debugPrint("Going to election detail with id ");
-                      },
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Colors.black),
+      child: WillPopScope(
+        onWillPop: () async => _onWillPop(context),
+        child: Scaffold(
+          backgroundColor: const Color.fromARGB(255, 246, 248, 250),
+          appBar: const CustomAppBar(
+            back: false,
+            disableBackGuard: true,
+            disableMenu: false,
+          ),
+          endDrawer: const CustomDrawer(),
+          bottomNavigationBar: !hasLoaded
+              ? null
+              : Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          context.go('/election-detail/${widget.id}/${widget.userId}');
+                          // debugPrint("Going to election detail with id ");
+                        },
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(Colors.black),
+                        ),
+                        child: const Text('Go back to election dashboard'),
                       ),
-                      child: const Text('Go back to election dashboard'),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-        body: Center(
-          child: !hasLoaded
-              ? const CustomCircularProgress(description: "Setting up your ballot to be submitted")
-              : Container(
-                  padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0),
-                  margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
-                  decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12.0), boxShadow: [
-                    BoxShadow(
-                        color: const Color.fromARGB(255, 211, 211, 211).withOpacity(0.5), //color of shadow
-                        spreadRadius: 3, //spread radius
-                        blurRadius: 7, // blur radius
-                        offset: const Offset(0, 6)),
-                  ]),
-                  child: BlocBuilder<PickedChoiceBloc, PickedChoiceState>(
-                    builder: (context, state) {
-                      if (state is PickedChoiceInitial) {
-                        return const CircularProgressIndicator(color: Colors.blue);
-                      } else if (state is PickedChoiceLoaded) {
-                        return VoteConfirmation(choice: state.choice);
-                      } else {
-                        return const Text("Something is wrong.");
-                      }
-                    },
-                  )),
+          body: Center(
+            child: !hasLoaded
+                ? const CustomCircularProgress(description: "Setting up your ballot to be submitted")
+                : Container(
+                    padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0),
+                    margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12.0), boxShadow: [
+                      BoxShadow(
+                          color: const Color.fromARGB(255, 211, 211, 211).withOpacity(0.5), //color of shadow
+                          spreadRadius: 3, //spread radius
+                          blurRadius: 7, // blur radius
+                          offset: const Offset(0, 6)),
+                    ]),
+                    child: BlocBuilder<PickedChoiceBloc, PickedChoiceState>(
+                      builder: (context, state) {
+                        if (state is PickedChoiceInitial) {
+                          return const CircularProgressIndicator(color: Colors.blue);
+                        } else if (state is PickedChoiceLoaded) {
+                          return VoteConfirmation(choice: state.choice);
+                        } else {
+                          return const Text("Something is wrong.");
+                        }
+                      },
+                    )),
+          ),
         ),
       ),
     );
@@ -130,4 +133,27 @@ class VoteConfirmation extends StatelessWidget {
       ],
     );
   }
+}
+
+Future<bool> _onWillPop(context) async {
+  bool? result = await showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Oops!'),
+        content: const Text('You cannot undo a submitted ballot.'),
+        actions: [
+          TextButton(
+            onPressed: () => context.pop(),
+            child: const Text('Ok'),
+          ),
+        ],
+      );
+    },
+  );
+
+  if (result == null) {
+    return false;
+  }
+  return result;
 }

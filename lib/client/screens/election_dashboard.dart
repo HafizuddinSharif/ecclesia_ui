@@ -317,7 +317,7 @@ class VoteChoiceRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(choice!.title ?? 'Null value given'),
+          Text(choice!.title),
           IconButton(
               onPressed: () {
                 context.go('/election-detail/$id/$userId/info/${choice!.id}');
