@@ -193,34 +193,34 @@ class VoteConfirmation extends StatelessWidget {
             ),
           ),
         ),
-        const Center(
-          child: Text.rich(
-            TextSpan(
-              text: 'Once you cast your vote, this action is ',
-              children: [
-                TextSpan(
-                  text: 'irreversible',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                  ),
+        RichText(
+          textAlign: TextAlign.center,
+          text: const TextSpan(
+            text: 'Once you cast your vote, this action is ',
+            style: TextStyle(color: Colors.black, fontSize: 16),
+            children: [
+              TextSpan(
+                text: 'irreversible',
+                style: TextStyle(
+                  fontWeight: FontWeight.w700,
                 ),
-                TextSpan(text: '.\n You can go back and '),
-                TextSpan(
-                  text: 'change',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                  ),
+              ),
+              TextSpan(text: '. You can go back and '),
+              TextSpan(
+                text: 'change',
+                style: TextStyle(
+                  fontWeight: FontWeight.w700,
                 ),
-                TextSpan(text: ' your choice '),
-                TextSpan(
-                  text: 'now',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                  ),
+              ),
+              TextSpan(text: ' your choice '),
+              TextSpan(
+                text: 'now',
+                style: TextStyle(
+                  fontWeight: FontWeight.w700,
                 ),
-                TextSpan(text: '.'),
-              ],
-            ),
+              ),
+              TextSpan(text: '.'),
+            ],
           ),
         ),
       ],

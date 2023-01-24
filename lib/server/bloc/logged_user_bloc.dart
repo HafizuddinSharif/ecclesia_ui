@@ -34,6 +34,10 @@ class LoggedUserBloc extends Bloc<LoggedUserEvent, LoggedUserState> {
         await Future<void>.delayed(const Duration(seconds: 10));
         state.user.joinedElections[Election.elections[int.parse(event.id)]] = ElectionStatusEnum.voteNotOpen;
         emit(LoggedUserLoaded(user: state.user));
+
+        await Future<void>.delayed(const Duration(seconds: 10));
+        state.user.joinedElections[Election.elections[int.parse(event.id)]] = ElectionStatusEnum.voteOpen;
+        emit(LoggedUserLoaded(user: state.user));
       }
     });
   }
