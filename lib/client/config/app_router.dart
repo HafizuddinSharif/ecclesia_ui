@@ -1,6 +1,7 @@
 import 'package:ecclesia_ui/client/screens/choice_info.dart';
 import 'package:ecclesia_ui/client/screens/home.dart';
 import 'package:ecclesia_ui/client/screens/election_dashboard.dart';
+import 'package:ecclesia_ui/client/screens/joined_organization_list.dart';
 import 'package:ecclesia_ui/client/screens/past_elections.dart';
 import 'package:ecclesia_ui/client/screens/register_camera.dart';
 import 'package:ecclesia_ui/client/screens/register_confirmation.dart';
@@ -17,6 +18,7 @@ import 'package:go_router/go_router.dart';
 
 GoRouter appRouter = GoRouter(
   routes: <GoRoute>[
+    // Home
     GoRoute(
       path: '/',
       builder: (context, state) => BlocProvider.value(
@@ -71,6 +73,7 @@ GoRouter appRouter = GoRouter(
                 return Result(id: state.params['electionId']!, userId: state.params['userId']!);
               },
             ),
+            // Choice info
             GoRoute(
                 path: 'info/:choiceId',
                 builder: (BuildContext context, GoRouterState state) {
@@ -134,6 +137,21 @@ GoRouter appRouter = GoRouter(
               path: 'camera',
               builder: (BuildContext context, GoRouterState state) {
                 return const RegisterCamera();
+              },
+            ),
+          ],
+        ),
+        // View joined organizations
+        GoRoute(
+          path: 'joined-organization',
+          builder: (BuildContext context, GoRouterState state) {
+            return const JoinedOrganizationList();
+          },
+          routes: [
+            GoRoute(
+              path: 'view/:organizationId',
+              builder: (BuildContext context, GoRouterState state) {
+                return const JoinedOrganizationList();
               },
             ),
           ],

@@ -31,12 +31,19 @@ class CustomDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            title: const Text('View past joined election(s)'),
+            title: const Text('View joined organization(s)'),
             onTap: () {
-              context.go('/past-elections');
+              context.go('/joined-organization');
               Scaffold.of(context).closeEndDrawer();
             },
           ),
+          // ListTile(
+          //   title: const Text('View past joined election(s)'),
+          //   onTap: () {
+          //     context.go('/past-elections');
+          //     Scaffold.of(context).closeEndDrawer();
+          //   },
+          // ),
         ],
       ),
     );
