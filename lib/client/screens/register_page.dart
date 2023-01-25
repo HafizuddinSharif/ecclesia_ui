@@ -140,7 +140,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         ElevatedButton(
                           onPressed: () {
                             debugPrint('Camera Open');
-                            getImage(true);
+                            context.go('/register-organization/camera');
+                            // getImage(true);
                           },
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(Colors.black),
