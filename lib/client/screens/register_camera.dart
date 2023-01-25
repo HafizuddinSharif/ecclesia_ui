@@ -6,7 +6,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 class RegisterCamera extends StatefulWidget {
-  const RegisterCamera({super.key});
+  final bool isElection;
+  const RegisterCamera({super.key, required this.isElection});
 
   @override
   State<RegisterCamera> createState() => _RegisterCameraState();
@@ -73,8 +74,14 @@ class _RegisterCameraState extends State<RegisterCamera> {
                 _fetching = true;
               });
 
-              if (code == "Yo mama so fat") {
+              if (widget.isElection && code == "joinElection") {
                 Future.delayed(const Duration(seconds: 3), () {
+                  // TODO: Implementation for joining election
+                  context.go('/register-election/confirmation');
+                });
+              } else if (!widget.isElection && code == "joinOrganization") {
+                Future.delayed(const Duration(seconds: 3), () {
+                  // TODO: Implementation for joining organization
                   context.go('/register-organization/confirmation');
                 });
               } else {

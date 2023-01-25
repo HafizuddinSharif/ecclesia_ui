@@ -20,3 +20,13 @@ class ChangeElectionOverview extends ElectionOverviewEvent {
 
   const ChangeElectionOverview({required this.election, required this.status});
 }
+
+class RefreshElectionOverview extends ElectionOverviewEvent {
+  final String id;
+  final String userId;
+
+  const RefreshElectionOverview({
+    required this.id,
+    required this.userId,
+  });
+}

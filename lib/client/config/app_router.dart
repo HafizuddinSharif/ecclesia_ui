@@ -108,7 +108,7 @@ GoRouter appRouter = GoRouter(
             GoRoute(
               path: 'camera',
               builder: (BuildContext context, GoRouterState state) {
-                return const RegisterCamera();
+                return const RegisterCamera(isElection: false);
               },
             ),
           ],
@@ -136,7 +136,9 @@ GoRouter appRouter = GoRouter(
             GoRoute(
               path: 'camera',
               builder: (BuildContext context, GoRouterState state) {
-                return const RegisterCamera();
+                return const RegisterCamera(
+                  isElection: true,
+                );
               },
             ),
           ],

@@ -32,9 +32,16 @@ class ElectionOverviewBloc extends Bloc<ElectionOverviewEvent, ElectionOverviewS
         emit(ElectionOverviewLoaded(election: election, status: status, id: event.id));
       }
     });
-    on<ChangeElectionOverview>(((event, emit) {
+    on<ChangeElectionOverview>((event, emit) {
       // final state = this.state as ElectionOverviewLoaded;
       emit(ElectionOverviewLoaded(election: event.election, status: event.status, id: event.election.id));
-    }));
+    });
+    on<RefreshElectionOverview>((event, emit) {
+      final user = Voter.voters[int.parse(event.userId)];
+      int id = int.parse(event.id);
+      Election election = Election.elections[id];
+      ElectionStatusEnum status = user.joinedElections[election]!;
+      emit(ElectionOverviewLoaded(election: election, status: status, id: event.id));
+    });
   }
 }

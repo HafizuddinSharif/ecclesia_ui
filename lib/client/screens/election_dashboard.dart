@@ -78,44 +78,51 @@ class ElectionDashboard extends StatelessWidget {
               }
             },
           ),
-          body: ListView(
-            children: [
-              BlocBuilder<ElectionOverviewBloc, ElectionOverviewState>(
-                builder: (context, state) {
-                  if (state is ElectionOverviewInitial) {
-                    return const CircularProgressIndicator(
-                      color: Colors.blue,
-                    );
-                  } else if (state is ElectionOverviewLoaded) {
-                    return ElectionStatus(
-                      title: state.election.title,
-                      description: state.election.description,
-                      organization: state.election.organization,
-                      status: state.status,
-                      startTime: state.election.startTime,
-                      endTime: state.election.endTime,
-                      choices: state.election.choices,
-                    );
-                  } else {
-                    return const Text('Something is wrong');
-                  }
-                },
-              ),
-              const ElectionDescription(),
-              VotingOptions(id: id, userId: userId),
-              BlocBuilder<ElectionOverviewBloc, ElectionOverviewState>(
-                builder: (context, state) {
-                  if (state is ElectionOverviewInitial) {
-                    return const CircularProgressIndicator(color: Colors.blue);
-                  } else if (state is ElectionOverviewLoaded) {
-                    bool castedStatus = state.status == ElectionStatusEnum.voted || state.status == ElectionStatusEnum.voteClosed;
-                    return castedStatus ? VoteCasted(id: id, userId: userId) : const SizedBox();
-                  } else {
-                    return const Text('Something is wrong');
-                  }
-                },
-              ),
-            ],
+          body: RefreshIndicator(
+            onRefresh: () {
+              return Future.delayed(const Duration(seconds: 2), (() {
+                context.read<ElectionOverviewBloc>().add(RefreshElectionOverview(id: id, userId: userId));
+              }));
+            },
+            child: ListView(
+              children: [
+                BlocBuilder<ElectionOverviewBloc, ElectionOverviewState>(
+                  builder: (context, state) {
+                    if (state is ElectionOverviewInitial) {
+                      return const CircularProgressIndicator(
+                        color: Colors.blue,
+                      );
+                    } else if (state is ElectionOverviewLoaded) {
+                      return ElectionStatus(
+                        title: state.election.title,
+                        description: state.election.description,
+                        organization: state.election.organization,
+                        status: state.status,
+                        startTime: state.election.startTime,
+                        endTime: state.election.endTime,
+                        choices: state.election.choices,
+                      );
+                    } else {
+                      return const Text('Something is wrong');
+                    }
+                  },
+                ),
+                const ElectionDescription(),
+                VotingOptions(id: id, userId: userId),
+                BlocBuilder<ElectionOverviewBloc, ElectionOverviewState>(
+                  builder: (context, state) {
+                    if (state is ElectionOverviewInitial) {
+                      return const CircularProgressIndicator(color: Colors.blue);
+                    } else if (state is ElectionOverviewLoaded) {
+                      bool castedStatus = state.status == ElectionStatusEnum.voted || state.status == ElectionStatusEnum.voteClosed;
+                      return castedStatus ? VoteCasted(id: id, userId: userId) : const SizedBox();
+                    } else {
+                      return const Text('Something is wrong');
+                    }
+                  },
+                ),
+              ],
+            ),
           )),
     );
   }

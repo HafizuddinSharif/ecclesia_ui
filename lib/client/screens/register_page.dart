@@ -139,8 +139,14 @@ class _RegisterPageState extends State<RegisterPage> {
                       children: [
                         ElevatedButton(
                           onPressed: () {
-                            debugPrint('Camera Open');
-                            context.go('/register-organization/camera');
+                            // debugPrint('Camera Open');
+
+                            if (widget.isElection) {
+                              context.go('/register-election/camera');
+                            } else {
+                              context.go('/register-organization/camera');
+                            }
+
                             // getImage(true);
                           },
                           style: ButtonStyle(
