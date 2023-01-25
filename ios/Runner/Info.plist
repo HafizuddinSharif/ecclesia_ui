@@ -47,5 +47,9 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Use the camera to scan barcodes</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To scan barcodes from the images in the gallery</string>
 </dict>
 </plist>
