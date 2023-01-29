@@ -107,7 +107,21 @@ class ElectionDashboard extends StatelessWidget {
                     }
                   },
                 ),
-                const ElectionDescription(),
+                BlocBuilder<ElectionOverviewBloc, ElectionOverviewState>(
+                  builder: (context, state) {
+                    if (state is ElectionOverviewInitial) {
+                      return const CircularProgressIndicator(
+                        color: Colors.blue,
+                      );
+                    } else if (state is ElectionOverviewLoaded) {
+                      return ElectionDescription(
+                        description: state.election.description,
+                      );
+                    } else {
+                      return const Text('Something is wrong');
+                    }
+                  },
+                ),
                 VotingOptions(id: id, userId: userId),
                 BlocBuilder<ElectionOverviewBloc, ElectionOverviewState>(
                   builder: (context, state) {
@@ -129,7 +143,9 @@ class ElectionDashboard extends StatelessWidget {
 }
 
 class ElectionDescription extends StatelessWidget {
+  final String description;
   const ElectionDescription({
+    required this.description,
     Key? key,
   }) : super(key: key);
 
@@ -156,9 +172,9 @@ class ElectionDescription extends StatelessWidget {
           ),
           Container(
             margin: const EdgeInsets.only(bottom: 10),
-            child: const Text(
-              'This is where the details of explaination of the objective of the election. Can also allow some sort of markdown functionality here so that the details can look nice and tidy',
-              style: TextStyle(fontSize: 14),
+            child: Text(
+              description,
+              style: const TextStyle(fontSize: 14),
               textAlign: TextAlign.justify,
             ),
           ),
@@ -360,7 +376,7 @@ class ElectionStatus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+      padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
       margin: const EdgeInsets.fromLTRB(0, 30, 0, 15),
       decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12.0), boxShadow: [
         BoxShadow(
@@ -397,19 +413,50 @@ class ElectionStatus extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(Icons.calendar_month),
-              Text(
-                '  Voting starts on ${DateFormat.yMd().format(startTime)}',
-                style: const TextStyle(fontSize: 12),
-              ),
-            ],
-          ),
+          ElectionTime(startTime: startTime, endTime: endTime, status: status),
           StatusTagDescription(status: status),
         ],
       ),
+    );
+  }
+}
+
+class ElectionTime extends StatelessWidget {
+  const ElectionTime({
+    Key? key,
+    required this.startTime,
+    required this.endTime,
+    required this.status,
+  }) : super(key: key);
+
+  final DateTime startTime;
+  final DateTime endTime;
+  final ElectionStatusEnum status;
+
+  @override
+  Widget build(BuildContext context) {
+    final bool preparing = ElectionStatusEnum.registeringDetails == status || ElectionStatusEnum.registeringDetails == status || ElectionStatusEnum.voteNotOpen == status;
+    final bool open = ElectionStatusEnum.voteOpen == status || ElectionStatusEnum.voteEnding == status;
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Icon(Icons.calendar_month),
+        preparing
+            ? Text(
+                '  Voting starts on ${DateFormat.yMd().format(startTime)}',
+                style: const TextStyle(fontSize: 12),
+              )
+            : open
+                ? Text(
+                    '  Voting ends on ${DateFormat.yMd().format(endTime)}',
+                    style: const TextStyle(fontSize: 12),
+                  )
+                : Text(
+                    '  Voting ended on ${DateFormat.yMd().format(endTime)}',
+                    style: const TextStyle(fontSize: 12),
+                  ),
+      ],
     );
   }
 }
