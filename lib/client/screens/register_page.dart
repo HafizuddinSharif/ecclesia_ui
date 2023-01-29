@@ -16,6 +16,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   XFile? _image;
+  // MobileScannerController controller = MobileScannerController();
 
   Future getImage(bool isCamera) async {
     XFile? image;
@@ -31,6 +32,15 @@ class _RegisterPageState extends State<RegisterPage> {
     setState(() {
       _image = image;
     });
+
+    // if (image != null) {
+    //   debugPrint("❤️❤️ Got image");
+    //   if (await controller.analyzeImage(image.path)) {
+    //     debugPrint("😊😊 There is a barcode");
+    //   } else {
+    //     debugPrint("😍😍 No barcode found");
+    //   }
+    // }
   }
 
   @override
@@ -156,18 +166,18 @@ class _RegisterPageState extends State<RegisterPage> {
                             'Scan QR code using camera',
                           ),
                         ),
-                        ElevatedButton(
-                          onPressed: () {
-                            debugPrint('Gallery Open');
-                            getImage(false);
-                          },
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(Colors.black),
-                          ),
-                          child: const Text(
-                            'Scan QR code using gallery',
-                          ),
-                        ),
+                        // ElevatedButton(
+                        //   onPressed: () {
+                        //     debugPrint('Gallery Open');
+                        //     getImage(false);
+                        //   },
+                        //   style: ButtonStyle(
+                        //     backgroundColor: MaterialStateProperty.all(Colors.black),
+                        //   ),
+                        //   child: const Text(
+                        //     'Scan QR code using gallery',
+                        //   ),
+                        // ),
                       ],
                     ),
                   ],
