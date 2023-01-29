@@ -90,7 +90,7 @@ class _VotingState extends State<Voting> {
                     if (state is ElectionOverviewLoaded) {
                       return ElevatedButton(
                         onPressed: () {
-                          context.read<ElectionOverviewBloc>().add(ChangeElectionOverview(election: state.election, status: ElectionStatusEnum.voted));
+                          context.read<ElectionOverviewBloc>().add(ChangeElectionOverview(election: state.election, status: ElectionStatusEnum.castingBallot));
                           context.read<JoinedElectionsBloc>().add(UpdateStatusJoinedElection(election: state.election, status: ElectionStatusEnum.voted));
                           context.read<LoggedUserBloc>().add(ConfirmVoteLoggedUserEvent(choice: selectedChoice, id: widget.id));
 

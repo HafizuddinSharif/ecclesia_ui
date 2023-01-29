@@ -22,9 +22,17 @@ class JoinedElectionsBloc extends Bloc<JoinedElectionsEvent, JoinedElectionsStat
       },
     );
     on<UpdateStatusJoinedElection>(
-      (event, emit) {
+      (event, emit) async {
         if (state is JoinedElectionsLoaded) {
           final state = this.state as JoinedElectionsLoaded;
+          state.elections[event.election] = ElectionStatusEnum.castingBallot;
+          emit(
+            JoinedElectionsLoaded(
+              elections: state.elections,
+            ),
+          );
+
+          await Future.delayed(const Duration(seconds: 15));
           state.elections[event.election] = event.status;
           emit(
             JoinedElectionsLoaded(
