@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:ecclesia_ui/data/models/choice_model.dart';
 import 'package:ecclesia_ui/data/models/election_model.dart';
 import 'package:ecclesia_ui/data/models/election_overview_model.dart';
+import 'package:ecclesia_ui/data/models/organization_model.dart';
 import 'package:ecclesia_ui/data/models/voter_model.dart';
 
 part 'logged_user_event.dart';
@@ -37,6 +38,13 @@ class LoggedUserBloc extends Bloc<LoggedUserEvent, LoggedUserState> {
 
         await Future<void>.delayed(const Duration(seconds: 10));
         state.user.joinedElections[Election.elections[int.parse(event.id)]] = ElectionStatusEnum.voteOpen;
+        emit(LoggedUserLoaded(user: state.user));
+      }
+    });
+    on<JoinOrganizationLoggedUserEvent>((event, emit) {
+      if (state is LoggedUserLoaded) {
+        final state = this.state as LoggedUserLoaded;
+        state.user.joinedOrganizations[event.organizationId] = Organization.organizations[int.parse(event.organizationId)];
         emit(LoggedUserLoaded(user: state.user));
       }
     });

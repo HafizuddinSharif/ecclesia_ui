@@ -1,6 +1,7 @@
 import 'package:ecclesia_ui/data/models/choice_model.dart';
 import 'package:ecclesia_ui/data/models/election_model.dart';
 import 'package:ecclesia_ui/data/models/election_overview_model.dart';
+import 'package:ecclesia_ui/data/models/organization_model.dart';
 import 'package:equatable/equatable.dart';
 
 class Voter extends Equatable {
@@ -9,6 +10,7 @@ class Voter extends Equatable {
   final String publicKey;
   final Map<Election, ElectionStatusEnum> joinedElections;
   final Map<Election, Choice> votedChoices;
+  final Map<String, Organization> joinedOrganizations;
 
   const Voter({
     required this.id,
@@ -16,6 +18,7 @@ class Voter extends Equatable {
     required this.publicKey,
     required this.joinedElections,
     required this.votedChoices,
+    required this.joinedOrganizations,
   });
 
   @override
@@ -27,6 +30,11 @@ class Voter extends Equatable {
       id: '0',
       name: 'Jackie Chan',
       publicKey: 'hwfi32932jf0',
+      joinedOrganizations: {
+        '0': Organization.organizations[0],
+        '1': Organization.organizations[1],
+        '2': Organization.organizations[2],
+      },
       joinedElections: {
         Election.elections[0]: ElectionStatusEnum.voteNotOpen,
         Election.elections[1]: ElectionStatusEnum.voteOpen,
@@ -42,6 +50,11 @@ class Voter extends Equatable {
       id: '1',
       name: 'Harry Kane',
       publicKey: 'hwfig2932jf0',
+      joinedOrganizations: {
+        '0': Organization.organizations[0],
+        '1': Organization.organizations[1],
+        '2': Organization.organizations[2],
+      },
       joinedElections: {
         Election.elections[0]: ElectionStatusEnum.voteClosed,
         Election.elections[1]: ElectionStatusEnum.voteEnding,
