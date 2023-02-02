@@ -16,6 +16,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   XFile? _image;
+  String inputCode = '';
   // MobileScannerController controller = MobileScannerController();
 
   Future getImage(bool isCamera) async {
@@ -110,24 +111,33 @@ class _RegisterPageState extends State<RegisterPage> {
                         Container(
                           height: 60,
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: const TextField(
-                              decoration: InputDecoration(
-                            labelText: 'Input joining link here',
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(6)),
-                              borderSide: BorderSide(width: 0, color: Colors.white),
-                            ),
-                            fillColor: Color.fromARGB(255, 217, 217, 217),
-                            filled: true,
-                            labelStyle: TextStyle(color: Colors.grey, fontSize: 14),
-                          )),
+                          child: TextField(
+                              onChanged: ((value) {
+                                setState(() {
+                                  inputCode = value;
+                                });
+                              }),
+                              decoration: const InputDecoration(
+                                labelText: 'Input joining link here',
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(6)),
+                                  borderSide: BorderSide(width: 0, color: Colors.white),
+                                ),
+                                fillColor: Color.fromARGB(255, 217, 217, 217),
+                                filled: true,
+                                labelStyle: TextStyle(color: Colors.grey, fontSize: 14),
+                              )),
                         ),
                         ElevatedButton(
                           onPressed: () {
                             if (widget.isElection) {
-                              context.go('/register-election/confirmation');
+                              if (inputCode == 'clubsocial892') {
+                                context.go('/register-election/confirmation');
+                              }
                             } else {
-                              context.go('/register-organization/confirmation');
+                              if (inputCode == 'edinburghuni432') {
+                                context.go('/register-organization/confirmation');
+                              }
                             }
                           },
                           child: const Text('Register'),
