@@ -29,6 +29,7 @@ class RegisterConfirmation extends StatelessWidget {
                     context.read<LoggedUserBloc>().add(const JoinElectionLoggedUserEvent(id: '4'));
                     context.go('/register-election/confirmation/confirmed');
                   } else {
+                    context.read<LoggedUserBloc>().add(const JoinOrganizationLoggedUserEvent(organizationId: '3'));
                     context.go('/register-organization/confirmation/confirmed');
                   }
                 },

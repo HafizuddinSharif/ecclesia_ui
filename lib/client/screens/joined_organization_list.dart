@@ -1,6 +1,9 @@
 import 'package:ecclesia_ui/client/widgets/custom_appbar.dart';
 import 'package:ecclesia_ui/client/widgets/custom_drawer.dart';
+import 'package:ecclesia_ui/data/models/organization_model.dart';
+import 'package:ecclesia_ui/server/bloc/logged_user_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class JoinedOrganizationList extends StatelessWidget {
   const JoinedOrganizationList({Key? key}) : super(key: key);
@@ -21,12 +24,29 @@ class JoinedOrganizationList extends StatelessWidget {
           ),
         ),
         Expanded(
-          child: ListView(
-            children: const <Widget>[
-              OrganizationCard(title: 'Edinburgh University Sports Union (EUSU)', description: 'Description here', icon: Icons.sports_baseball_rounded),
-              OrganizationCard(title: 'Edinburgh Baking Society', description: 'Description here', icon: Icons.cake_rounded),
-              OrganizationCard(title: 'Informatics 19/23', description: 'Description here', icon: Icons.computer_rounded),
-            ],
+          child: BlocBuilder<LoggedUserBloc, LoggedUserState>(
+            builder: (context, state) {
+              if (state is LoggedUserInitial) {
+                return const CircularProgressIndicator();
+              } else if (state is LoggedUserLoaded) {
+                // return ListView(
+                //   children: const <Widget>[
+                //     OrganizationCard(title: 'Edinburgh University Sports Union (EUSU)', description: 'Description here', icon: Icons.sports_baseball_rounded),
+                //     OrganizationCard(title: 'Edinburgh Baking Society', description: 'Description here', icon: Icons.cake_rounded),
+                //     OrganizationCard(title: 'Informatics 19/23', description: 'Description here', icon: Icons.computer_rounded),
+                //   ],
+                // );
+                return ListView.builder(
+                  itemCount: state.user.joinedOrganizations.length,
+                  itemBuilder: ((context, index) {
+                    Organization organization = state.user.joinedOrganizations.entries.elementAt(index).value;
+                    return OrganizationCard(icon: organization.icon, title: organization.name, description: organization.description);
+                  }),
+                );
+              } else {
+                return const Text('Something is wrong');
+              }
+            },
           ),
         ),
       ]),
