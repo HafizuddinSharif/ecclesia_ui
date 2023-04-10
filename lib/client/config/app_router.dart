@@ -6,7 +6,7 @@ import 'package:ecclesia_ui/client/screens/past_elections.dart';
 import 'package:ecclesia_ui/client/screens/register_camera.dart';
 import 'package:ecclesia_ui/client/screens/register_confirmation.dart';
 import 'package:ecclesia_ui/client/screens/register_confirmed.dart';
-import 'package:ecclesia_ui/client/screens/register_page.dart';
+import 'package:ecclesia_ui/client/screens/register_method.dart';
 import 'package:ecclesia_ui/client/screens/result.dart';
 import 'package:ecclesia_ui/client/screens/voting.dart';
 import 'package:ecclesia_ui/client/screens/voting_casted.dart';
@@ -85,7 +85,7 @@ GoRouter appRouter = GoRouter(
         GoRoute(
           path: 'register-organization',
           builder: (BuildContext context, GoRouterState state) {
-            return const RegisterPage(isElection: false);
+            return const RegisterMethod(isElection: false);
           },
           routes: [
             GoRoute(
@@ -117,7 +117,7 @@ GoRouter appRouter = GoRouter(
         GoRoute(
           path: 'register-election',
           builder: (BuildContext context, GoRouterState state) {
-            return const RegisterPage(isElection: true);
+            return const RegisterMethod(isElection: true);
           },
           routes: [
             GoRoute(
