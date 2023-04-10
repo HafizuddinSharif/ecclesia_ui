@@ -2,7 +2,7 @@ import 'package:ecclesia_ui/client/widgets/custom_appbar.dart';
 import 'package:ecclesia_ui/client/widgets/custom_drawer.dart';
 import 'package:ecclesia_ui/client/widgets/custom_radio_list_tile.dart';
 import 'package:ecclesia_ui/data/models/choice_model.dart';
-import 'package:ecclesia_ui/data/models/election_model.dart';
+import 'package:ecclesia_ui/data/models/election_status_model.dart';
 import 'package:ecclesia_ui/server/bloc/election_overview_bloc.dart';
 import 'package:ecclesia_ui/server/bloc/joined_elections_bloc.dart';
 import 'package:ecclesia_ui/server/bloc/logged_user_bloc.dart';

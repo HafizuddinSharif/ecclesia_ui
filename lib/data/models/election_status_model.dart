@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+// Constants to represent the phase of an election
+enum ElectionStatusEnum { voteNotOpen, voteOpen, voteEnding, voted, voteClosed, registeringDetails, castingBallot }
+
 class ElectionCardModel {
   final String statusTitle;
   final Color color;
