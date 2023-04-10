@@ -1,6 +1,7 @@
 import 'package:ecclesia_ui/data/models/choice_model.dart';
 import 'package:ecclesia_ui/data/models/election_model.dart';
 
+// Class model for result of election
 class ElectionResult {
   final Election election;
   final Map<Choice, int> voteCounts;

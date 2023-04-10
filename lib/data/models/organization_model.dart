@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// Class model of an organization
 class Organization {
   final String id;
   final String name;

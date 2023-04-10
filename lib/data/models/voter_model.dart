@@ -3,6 +3,7 @@ import 'package:ecclesia_ui/data/models/election_model.dart';
 import 'package:ecclesia_ui/data/models/organization_model.dart';
 import 'package:equatable/equatable.dart';
 
+// Class model of a voter
 class Voter extends Equatable {
   final String id;
   final String name;
