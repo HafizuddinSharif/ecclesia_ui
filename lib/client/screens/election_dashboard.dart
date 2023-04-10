@@ -1,4 +1,5 @@
 import 'package:ecclesia_ui/client/widgets/custom_appbar.dart';
+import 'package:ecclesia_ui/client/widgets/custom_container.dart';
 import 'package:ecclesia_ui/client/widgets/custom_drawer.dart';
 import 'package:ecclesia_ui/client/widgets/status_tag.dart';
 import 'package:ecclesia_ui/client/widgets/status_tag_description.dart';
@@ -154,16 +155,7 @@ class ElectionDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0),
-      margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12.0), boxShadow: [
-        BoxShadow(
-            color: const Color.fromARGB(255, 211, 211, 211).withOpacity(0.5), //color of shadow
-            spreadRadius: 3, //spread radius
-            blurRadius: 7, // blur radius
-            offset: const Offset(0, 6)),
-      ]),
+    return CustomContainer(
       child: Column(
         children: [
           Container(
@@ -199,16 +191,7 @@ class VoteCasted extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 10.0),
-      margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12.0), boxShadow: [
-        BoxShadow(
-            color: const Color.fromARGB(255, 211, 211, 211).withOpacity(0.5), //color of shadow
-            spreadRadius: 3, //spread radius
-            blurRadius: 7, // blur radius
-            offset: const Offset(0, 6)),
-      ]),
+    return CustomContainer(
       child: Column(
         children: [
           Container(
@@ -274,16 +257,7 @@ class VotingOptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 10.0),
-      margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12.0), boxShadow: [
-        BoxShadow(
-            color: const Color.fromARGB(255, 211, 211, 211).withOpacity(0.5), //color of shadow
-            spreadRadius: 3, //spread radius
-            blurRadius: 7, // blur radius
-            offset: const Offset(0, 6)),
-      ]),
+    return CustomContainer(
       child: Column(
         children: [
           Container(
@@ -378,16 +352,7 @@ class ElectionStatus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
-      margin: const EdgeInsets.fromLTRB(0, 30, 0, 15),
-      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12.0), boxShadow: [
-        BoxShadow(
-            color: const Color.fromARGB(255, 211, 211, 211).withOpacity(0.5), //color of shadow
-            spreadRadius: 3, //spread radius
-            blurRadius: 7, // blur radius
-            offset: const Offset(0, 6)),
-      ]),
+    return CustomContainer(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

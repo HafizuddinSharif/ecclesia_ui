@@ -1,4 +1,5 @@
 import 'package:ecclesia_ui/client/widgets/custom_appbar.dart';
+import 'package:ecclesia_ui/client/widgets/custom_container.dart';
 import 'package:ecclesia_ui/client/widgets/custom_drawer.dart';
 import 'package:ecclesia_ui/client/widgets/custom_radio_list_tile.dart';
 import 'package:ecclesia_ui/data/models/choice_model.dart';
@@ -120,16 +121,7 @@ class _VotingState extends State<Voting> {
           ),
         ),
         body: Center(
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0),
-            margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
-            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12.0), boxShadow: [
-              BoxShadow(
-                  color: const Color.fromARGB(255, 211, 211, 211).withOpacity(0.5), //color of shadow
-                  spreadRadius: 3, //spread radius
-                  blurRadius: 7, // blur radius
-                  offset: const Offset(0, 6)),
-            ]),
+          child: CustomContainer(
             child: hasChosen
                 ? const VoteConfirmation()
                 : VotingPicker(
