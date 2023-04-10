@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:ecclesia_ui/data/models/election_model.dart';
-import 'package:ecclesia_ui/data/models/election_overview_model.dart';
 import 'package:ecclesia_ui/data/models/voter_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

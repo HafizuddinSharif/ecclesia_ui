@@ -1,6 +1,10 @@
 import 'package:ecclesia_ui/data/models/choice_model.dart';
 import 'package:equatable/equatable.dart';
 
+// Model on an election/voting
+
+enum ElectionStatusEnum { voteNotOpen, voteOpen, voteEnding, voted, voteClosed, registeringDetails, castingBallot }
+
 class Election extends Equatable {
   final String id;
   final String title;

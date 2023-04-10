@@ -1,5 +1,5 @@
 import 'package:ecclesia_ui/client/widgets/status_tag.dart';
-import 'package:ecclesia_ui/data/models/election_overview_model.dart';
+import 'package:ecclesia_ui/data/models/election_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

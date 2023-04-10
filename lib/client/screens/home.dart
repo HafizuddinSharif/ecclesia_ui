@@ -1,5 +1,4 @@
 import 'package:ecclesia_ui/data/models/election_model.dart';
-import 'package:ecclesia_ui/data/models/election_overview_model.dart';
 import 'package:ecclesia_ui/client/widgets/custom_appbar.dart';
 import 'package:ecclesia_ui/client/widgets/custom_drawer.dart';
 import 'package:ecclesia_ui/client/widgets/election_card.dart';

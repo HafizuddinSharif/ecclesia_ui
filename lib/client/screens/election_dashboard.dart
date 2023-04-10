@@ -4,7 +4,6 @@ import 'package:ecclesia_ui/client/widgets/status_tag.dart';
 import 'package:ecclesia_ui/client/widgets/status_tag_description.dart';
 import 'package:ecclesia_ui/data/models/choice_model.dart';
 import 'package:ecclesia_ui/data/models/election_model.dart';
-import 'package:ecclesia_ui/data/models/election_overview_model.dart';
 import 'package:ecclesia_ui/server/bloc/election_overview_bloc.dart';
 import 'package:ecclesia_ui/server/bloc/logged_user_bloc.dart';
 import 'package:flutter/material.dart';
