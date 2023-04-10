@@ -4,12 +4,16 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-// Screen to show results of the election. It present who/what have won, and the breakdown of the vote count.
+// Screen to show results of the election. It present who/what have won,
+// and the breakdown of the vote count.
+// DEV NOTE: At the moment, all of the data present is hard coded due to
+// time constraint during development.
 
 class Result extends StatelessWidget {
   final String id;
   final String userId;
 
+  // Dummy data that is used to render data.
   final List<BarChartGroupData> data = [
     BarChartGroupData(x: 1, barRods: [
       BarChartRodData(toY: 16, width: 30, color: Colors.blue),
@@ -22,7 +26,11 @@ class Result extends StatelessWidget {
     ]),
   ];
 
-  Result({Key? key, required this.id, required this.userId}) : super(key: key);
+  Result({
+    Key? key,
+    required this.id,
+    required this.userId,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +48,10 @@ class Result extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            // Button to go back home
             ElevatedButton(
               onPressed: () {
                 context.go('/');
-                // debugPrint("Going to election detail with id ");
               },
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.black),
@@ -124,7 +132,6 @@ class GraphElection extends StatelessWidget {
             offset: const Offset(0, 6)),
       ]),
       child: Column(
-        // direction: Axis.vertical,
         children: [
           Container(
             margin: const EdgeInsets.only(bottom: 10),

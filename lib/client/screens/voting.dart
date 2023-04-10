@@ -161,6 +161,7 @@ class DisabledButton extends StatelessWidget {
   }
 }
 
+// Prompt to ask the user if the selected choice is correct before submitting
 class VoteConfirmation extends StatelessWidget {
   const VoteConfirmation({
     Key? key,

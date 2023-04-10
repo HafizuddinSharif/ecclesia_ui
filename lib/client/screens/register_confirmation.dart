@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-// Screen to prompt user whether their intended organization/election to be joined is correct.
+// Screen to prompt user whether their intended organization/election
+// to be joined is correct.
 
 class RegisterConfirmation extends StatelessWidget {
   final bool isElection;
@@ -27,6 +28,7 @@ class RegisterConfirmation extends StatelessWidget {
             children: [
               ElevatedButton(
                 onPressed: () {
+                  // TODO: This is hard-coded
                   if (isElection) {
                     context.read<LoggedUserBloc>().add(const JoinElectionLoggedUserEvent(id: '4'));
                     context.go('/register-election/confirmation/confirmed');
@@ -77,6 +79,8 @@ class RegisterConfirmation extends StatelessWidget {
   }
 }
 
+// Prompt message to confirm from the user of intended election
+// to join
 class JoinElectionConfirmation extends StatelessWidget {
   const JoinElectionConfirmation({
     Key? key,
@@ -117,6 +121,8 @@ class JoinElectionConfirmation extends StatelessWidget {
   }
 }
 
+// Prompt message to confirm from the user of intended organization
+// to join
 class JoinOrganizationConfirmation extends StatelessWidget {
   const JoinOrganizationConfirmation({
     Key? key,

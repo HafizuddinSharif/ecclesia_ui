@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-// The start-up screen
+// The start-up screen. It will appear for a moment and move to
+// joined_election_list.dart screen
 
 class Welcome extends StatefulWidget {
   const Welcome({Key? key}) : super(key: key);
@@ -10,6 +11,7 @@ class Welcome extends StatefulWidget {
 }
 
 class _WelcomeState extends State<Welcome> with TickerProviderStateMixin {
+  // Edit here to change the animation settings of the screen
   late final AnimationController _controller = AnimationController(
     duration: const Duration(seconds: 1),
     vsync: this,

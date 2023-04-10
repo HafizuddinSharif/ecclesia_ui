@@ -1,9 +1,6 @@
 import 'package:ecclesia_ui/data/models/choice_model.dart';
 import 'package:equatable/equatable.dart';
 
-// Constants to represent the phase of an election
-enum ElectionStatusEnum { voteNotOpen, voteOpen, voteEnding, voted, voteClosed, registeringDetails, castingBallot }
-
 // Class model of an election
 class Election extends Equatable {
   final String id;

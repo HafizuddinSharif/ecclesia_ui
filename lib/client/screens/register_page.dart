@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
-// Screen that allow the user to join an organization/election by inpuitting join code or using QR code.
+// Screen that allow the user to join an organization/election by
+// inpuitting join code or using QR code.
 
 class RegisterPage extends StatefulWidget {
   final bool isElection;
@@ -19,7 +20,6 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   XFile? _image;
   String inputCode = '';
-  // MobileScannerController controller = MobileScannerController();
 
   Future getImage(bool isCamera) async {
     XFile? image;
@@ -35,15 +35,6 @@ class _RegisterPageState extends State<RegisterPage> {
     setState(() {
       _image = image;
     });
-
-    // if (image != null) {
-    //   debugPrint("❤️❤️ Got image");
-    //   if (await controller.analyzeImage(image.path)) {
-    //     debugPrint("😊😊 There is a barcode");
-    //   } else {
-    //     debugPrint("😍😍 No barcode found");
-    //   }
-    // }
   }
 
   @override
@@ -113,6 +104,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         Container(
                           height: 60,
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          // Text field to join using join code
                           child: TextField(
                               onChanged: ((value) {
                                 setState(() {
@@ -130,13 +122,16 @@ class _RegisterPageState extends State<RegisterPage> {
                                 labelStyle: TextStyle(color: Colors.grey, fontSize: 14),
                               )),
                         ),
+                        // Button to submit join code
                         ElevatedButton(
                           onPressed: () {
                             if (widget.isElection) {
+                              // TODO: This is hard-coded and should be change
                               if (inputCode == 'clubsocial892') {
                                 context.go('/register-election/confirmation');
                               }
                             } else {
+                              // TODO: This is hard-coded and should be change
                               if (inputCode == 'edinburghuni432') {
                                 context.go('/register-organization/confirmation');
                               }
@@ -159,17 +154,14 @@ class _RegisterPageState extends State<RegisterPage> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
+                        // Button to scan QR code using camera
                         ElevatedButton(
                           onPressed: () {
-                            // debugPrint('Camera Open');
-
                             if (widget.isElection) {
                               context.go('/register-election/camera');
                             } else {
                               context.go('/register-organization/camera');
                             }
-
-                            // getImage(true);
                           },
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(Colors.black),
@@ -178,6 +170,9 @@ class _RegisterPageState extends State<RegisterPage> {
                             'Scan QR code using camera',
                           ),
                         ),
+
+                        // Comment this in to enable scanning from gallery
+
                         // ElevatedButton(
                         //   onPressed: () {
                         //     debugPrint('Gallery Open');

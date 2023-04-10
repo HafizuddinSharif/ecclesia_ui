@@ -100,6 +100,7 @@ class _VotingCastedState extends State<VotingCasted> {
   }
 }
 
+// Widget to show the choice that has been voted by the user
 class VoteConfirmation extends StatelessWidget {
   final Choice choice;
   const VoteConfirmation({
@@ -137,6 +138,7 @@ class VoteConfirmation extends StatelessWidget {
   }
 }
 
+// To stop voter going back using android back button
 Future<bool> _onWillPop(context) async {
   bool? result = await showDialog(
     context: context,

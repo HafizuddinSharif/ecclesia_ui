@@ -62,10 +62,12 @@ class InfoContainer extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            // Name of the choice
             Text(choice.title, style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w700)),
             const SizedBox(
               height: 15,
             ),
+            // Description of the choide
             Text(
               choice.description,
               textAlign: TextAlign.justify,

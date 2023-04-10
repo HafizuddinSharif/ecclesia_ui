@@ -4,7 +4,9 @@ import 'package:ecclesia_ui/client/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-// Screen to show the status of the user's registeration to an organization/election
+// Screen to show the status of the user's registeration to an
+// organization/election
+// DEV NOTE: At the moment it is hard-coded
 
 class RegisterConfirmed extends StatefulWidget {
   final bool isElection;
@@ -23,7 +25,6 @@ class _RegisterConfirmedState extends State<RegisterConfirmed> {
 
     Future.delayed(const Duration(seconds: 5), () {
       setState(() {
-        // Here you can write your code for open new view
         hasLoaded = true;
       });
     });
@@ -75,6 +76,8 @@ class _RegisterConfirmedState extends State<RegisterConfirmed> {
   }
 }
 
+// Custom widget to show message on confirmation of joining
+// an organization
 class JoinOrganizationConfirmed extends StatelessWidget {
   const JoinOrganizationConfirmed({
     Key? key,
@@ -96,6 +99,7 @@ class JoinOrganizationConfirmed extends StatelessWidget {
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 10),
+        // TODO: This is hard-coded
         const Text(
           'Edinburgh University Students\' Association (EUSA)',
           textAlign: TextAlign.center,
@@ -124,6 +128,8 @@ class JoinOrganizationConfirmed extends StatelessWidget {
   }
 }
 
+// Custom widget to show message on confirmation of joining
+// an election
 class JoinElectionPending extends StatelessWidget {
   const JoinElectionPending({
     Key? key,

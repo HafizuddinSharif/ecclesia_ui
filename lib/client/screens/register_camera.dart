@@ -5,7 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
-// Screen to use camera to scan QR code to either join an organization or an election.
+// Screen to use camera to scan QR code to
+// either join an organization or an election.
 
 class RegisterCamera extends StatefulWidget {
   final bool isElection;

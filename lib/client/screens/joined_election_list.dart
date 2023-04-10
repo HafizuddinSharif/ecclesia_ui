@@ -40,26 +40,7 @@ class JoinedElectionList extends StatelessWidget {
             body: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Container(
-                //   margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                //   child: Container(
-                //     height: 60,
-                //     padding: const EdgeInsets.all(8.0),
-                //     child: const TextField(
-                //         decoration: InputDecoration(
-                //       labelText: 'Type here to search',
-                //       suffixIcon: Icon(Icons.search),
-                //       enabledBorder: OutlineInputBorder(
-                //         borderRadius: BorderRadius.all(Radius.circular(6)),
-                //         borderSide: BorderSide(width: 0, color: Colors.white),
-                //       ),
-                //       fillColor: Color.fromARGB(255, 217, 217, 217),
-                //       filled: true,
-                //       suffixIconColor: Color.fromARGB(255, 255, 255, 255),
-                //       labelStyle: TextStyle(color: Colors.black),
-                //     )),
-                //   ),
-                // ),
+                // SearchBar(),
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 10.0),
                   child: Column(children: [
@@ -89,7 +70,6 @@ class JoinedElectionList extends StatelessWidget {
                   ]),
                 ),
                 Expanded(
-                  // margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                   child: Column(children: [
                     const Padding(
                       padding: EdgeInsets.symmetric(vertical: 5.0),
@@ -105,7 +85,6 @@ class JoinedElectionList extends StatelessWidget {
                             color: Colors.blue,
                           );
                         } else if (state is JoinedElectionsLoaded) {
-                          // debugPrint('//${state.elections.length}');
                           return Expanded(
                             child: ListView.builder(
                               padding: const EdgeInsets.only(bottom: 100),
@@ -137,6 +116,38 @@ class JoinedElectionList extends StatelessWidget {
                 ),
               ],
             )),
+      ),
+    );
+  }
+}
+
+// Widget to search election
+// DEV NOTE: Not implemented yet
+class SearchBar extends StatelessWidget {
+  const SearchBar({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+      child: Container(
+        height: 60,
+        padding: const EdgeInsets.all(8.0),
+        child: const TextField(
+            decoration: InputDecoration(
+          labelText: 'Type here to search',
+          suffixIcon: Icon(Icons.search),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(6)),
+            borderSide: BorderSide(width: 0, color: Colors.white),
+          ),
+          fillColor: Color.fromARGB(255, 217, 217, 217),
+          filled: true,
+          suffixIconColor: Color.fromARGB(255, 255, 255, 255),
+          labelStyle: TextStyle(color: Colors.black),
+        )),
       ),
     );
   }
