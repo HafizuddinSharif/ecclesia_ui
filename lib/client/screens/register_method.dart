@@ -9,15 +9,15 @@ import 'package:image_picker/image_picker.dart';
 // Screen that allow the user to join an organization/election by
 // inpuitting join code or using QR code.
 
-class RegisterPage extends StatefulWidget {
+class RegisterMethod extends StatefulWidget {
   final bool isElection;
-  const RegisterPage({Key? key, required this.isElection}) : super(key: key);
+  const RegisterMethod({Key? key, required this.isElection}) : super(key: key);
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  State<RegisterMethod> createState() => _RegisterMethodState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _RegisterMethodState extends State<RegisterMethod> {
   XFile? _image;
   String inputCode = '';
 
