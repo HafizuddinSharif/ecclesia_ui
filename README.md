@@ -1,16 +1,12 @@
-# ecclesia_ui
+# Pebble Vote
 
-A new Flutter project.
+This is a project for a mobile client that interacts with the [E-cclesia e-voting protocol](https://www.pebble.vote/). The client is developed using [Flutter](https://flutter.dev/) and [BLoC](https://bloclibrary.dev/#/) as the state management.
 
-## Getting Started
+## State of project
 
-This project is a starting point for a Flutter application.
+At the moment, the UI is not connected with the backend. To connect it, you should understand how to use BLoC because it is the state management that has been setup. Currently dummy data is being populated in the UI.
 
-A few resources to get you started if this is your first Flutter project:
+## Developer notes
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Dummy data can be found in the respective model dart files, `lib/data/models`.
+2. This project uses `app_router` for routes.
