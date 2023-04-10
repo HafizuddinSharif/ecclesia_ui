@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
+// Screen that allow the user to join an organization/election by inpuitting join code or using QR code.
+
 class RegisterPage extends StatefulWidget {
   final bool isElection;
   const RegisterPage({Key? key, required this.isElection}) : super(key: key);

@@ -4,6 +4,8 @@ import 'package:ecclesia_ui/client/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+// Screen to show the status of the user's registeration to an organization/election
+
 class RegisterConfirmed extends StatefulWidget {
   final bool isElection;
   const RegisterConfirmed({Key? key, required this.isElection}) : super(key: key);

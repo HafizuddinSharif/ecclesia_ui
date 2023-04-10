@@ -5,6 +5,8 @@ import 'package:ecclesia_ui/server/bloc/logged_user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+// This screen is to list out the current joined organizations.
+
 class JoinedOrganizationList extends StatelessWidget {
   const JoinedOrganizationList({Key? key}) : super(key: key);
 
@@ -29,13 +31,6 @@ class JoinedOrganizationList extends StatelessWidget {
               if (state is LoggedUserInitial) {
                 return const CircularProgressIndicator();
               } else if (state is LoggedUserLoaded) {
-                // return ListView(
-                //   children: const <Widget>[
-                //     OrganizationCard(title: 'Edinburgh University Sports Union (EUSU)', description: 'Description here', icon: Icons.sports_baseball_rounded),
-                //     OrganizationCard(title: 'Edinburgh Baking Society', description: 'Description here', icon: Icons.cake_rounded),
-                //     OrganizationCard(title: 'Informatics 19/23', description: 'Description here', icon: Icons.computer_rounded),
-                //   ],
-                // );
                 return ListView.builder(
                   itemCount: state.user.joinedOrganizations.length,
                   itemBuilder: ((context, index) {

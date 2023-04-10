@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+// Screen to prompt user whether their intended organization/election to be joined is correct.
+
 class RegisterConfirmation extends StatelessWidget {
   final bool isElection;
 

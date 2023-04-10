@@ -4,6 +4,8 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+// Screen to show results of the election. It present who/what have won, and the breakdown of the vote count.
+
 class Result extends StatelessWidget {
   final String id;
   final String userId;
@@ -18,21 +20,6 @@ class Result extends StatelessWidget {
     BarChartGroupData(x: 3, barRods: [
       BarChartRodData(toY: 11, width: 30, color: Colors.orange),
     ]),
-    // BarChartGroupData(x: 4, barRods: [
-    //   BarChartRodData(toY: 2, width: 15, color: Colors.amber),
-    // ]),
-    // BarChartGroupData(x: 5, barRods: [
-    //   BarChartRodData(toY: 13, width: 15, color: Colors.amber),
-    // ]),
-    // BarChartGroupData(x: 6, barRods: [
-    //   BarChartRodData(toY: 17, width: 15, color: Colors.amber),
-    // ]),
-    // BarChartGroupData(x: 7, barRods: [
-    //   BarChartRodData(toY: 19, width: 15, color: Colors.amber),
-    // ]),
-    // BarChartGroupData(x: 8, barRods: [
-    //   BarChartRodData(toY: 21, width: 15, color: Colors.amber),
-    // ]),
   ];
 
   Result({Key? key, required this.id, required this.userId}) : super(key: key);

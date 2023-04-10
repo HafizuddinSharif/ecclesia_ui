@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+// To represent the choice in a voting process
+
 class Choice extends Equatable {
   final String id;
   final String title;

@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+// To show the status of the voter's ballot once they have voted.
+
 class VotingCasted extends StatefulWidget {
   final String id;
   final String userId;

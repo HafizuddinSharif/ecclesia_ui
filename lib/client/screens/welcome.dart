@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+// The start-up screen
+
 class Welcome extends StatefulWidget {
   const Welcome({Key? key}) : super(key: key);
 

@@ -5,6 +5,8 @@ import 'package:ecclesia_ui/server/bloc/choice_view_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+// Screen to present more details of a choice/candidate in an election/voting
+
 class ChoiceInfo extends StatelessWidget {
   final String choiceId;
   final String id;

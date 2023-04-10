@@ -11,6 +11,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
+// Screen for an election dashboard that presents the details about the election in terms of the name, start and end time, choices, and etc.
+
 class ElectionDashboard extends StatelessWidget {
   final String id;
   final String userId;

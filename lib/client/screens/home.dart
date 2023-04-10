@@ -8,6 +8,8 @@ import 'package:ecclesia_ui/server/bloc/joined_elections_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+// This screen is the home screen or can be known as 'Election list' screen which is meant to list current active joined election(s).
+
 class Home extends StatelessWidget {
   final Voter user;
 

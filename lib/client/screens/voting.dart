@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+// Screen for the voting process
+
 class Voting extends StatefulWidget {
   final String id;
   final String userId;
