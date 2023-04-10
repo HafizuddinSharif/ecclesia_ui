@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+// Custom circular progress indicator which can pass
+// custom message
+
 class CustomCircularProgress extends StatelessWidget {
   final String description;
   const CustomCircularProgress({Key? key, required this.description}) : super(key: key);

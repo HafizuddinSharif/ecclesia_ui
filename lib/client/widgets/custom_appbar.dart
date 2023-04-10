@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   final Size preferredSize;
-
   final bool back;
   final bool disableMenu;
   final bool disableBackGuard;
@@ -31,9 +30,10 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       leadingWidth: 100,
       shadowColor: const Color.fromARGB(255, 0, 0, 0).withOpacity(0.3),
       automaticallyImplyLeading: false,
+      // Edit here for the back button on the left side of the appbar
       leading: back
           ? InkWell(
-              onTap: () => backButtonPressed(disableBackGuard, context),
+              onTap: () => confirmBackPressed(disableBackGuard, context),
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
                 padding: const EdgeInsets.symmetric(horizontal: 0.0),
@@ -49,32 +49,15 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
             )
           : null,
       centerTitle: true,
+      // Edit here for the menu button on the right side of the appbar
       actions: [
-        disableMenu
-            ? Container()
-            : InkWell(
-                onTap: () {
-                  Scaffold.of(context).openEndDrawer();
-                  debugPrint('Menu open!');
-                },
-                child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
-                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: Colors.black,
-                  ),
-                  child: const Icon(
-                    Icons.menu_rounded,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
+        disableMenu ? Container() : const Sidebar(),
       ],
     );
   }
 
-  void backButtonPressed(bool disableBackGuard, BuildContext context) {
+  // A popup modal to avoid user from accidently going back one screen
+  void confirmBackPressed(bool disableBackGuard, BuildContext context) {
     if (disableBackGuard == false) {
       showDialog(
         context: context,
@@ -101,5 +84,34 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     } else {
       context.pop();
     }
+  }
+}
+
+// Menu button when clicked will open a sidebar
+// To customize sidebar items, see ./custom_drawer.dart
+class Sidebar extends StatelessWidget {
+  const Sidebar({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Scaffold.of(context).openEndDrawer();
+      },
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
+        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          color: Colors.black,
+        ),
+        child: const Icon(
+          Icons.menu_rounded,
+          color: Colors.white,
+        ),
+      ),
+    );
   }
 }

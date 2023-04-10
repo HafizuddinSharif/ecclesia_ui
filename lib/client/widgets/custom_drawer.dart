@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+// Widget for sidebar. Use ListTile to add new item in the sidebar menu.
+
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({Key? key}) : super(key: key);
 
@@ -37,13 +39,6 @@ class CustomDrawer extends StatelessWidget {
               Scaffold.of(context).closeEndDrawer();
             },
           ),
-          // ListTile(
-          //   title: const Text('View past joined election(s)'),
-          //   onTap: () {
-          //     context.go('/past-elections');
-          //     Scaffold.of(context).closeEndDrawer();
-          //   },
-          // ),
         ],
       ),
     );

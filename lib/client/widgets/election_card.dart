@@ -1,7 +1,10 @@
 import 'package:ecclesia_ui/client/widgets/status_tag.dart';
-import 'package:ecclesia_ui/data/models/election_model.dart';
+import 'package:ecclesia_ui/data/models/election_status_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
+// Card widget for the election card that used to give brief information
+// for the voter
 
 class ElectionCard extends StatelessWidget {
   final String id;

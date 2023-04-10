@@ -1,6 +1,9 @@
 import 'package:ecclesia_ui/data/models/choice_model.dart';
 import 'package:flutter/material.dart';
 
+// Widget for the radio button that have customised styling
+// that looks like a box and when clicked, it will have cross inside
+
 class CustomRadioListTile<T> extends StatelessWidget {
   final String value;
   final String groupValue;
@@ -41,10 +44,8 @@ class CustomRadioListTile<T> extends StatelessWidget {
   Widget get _customRadioButton {
     final isSelected = value == groupValue;
     return Container(
-      // padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
         color: isSelected ? Colors.blue : Colors.white,
-        // borderRadius: BorderRadius.circular(4),
         border: Border.all(
           color: isSelected ? Colors.blue : Colors.black,
           width: 1,
