@@ -1,5 +1,5 @@
 import 'package:ecclesia_ui/client/screens/choice_info.dart';
-import 'package:ecclesia_ui/client/screens/home.dart';
+import 'package:ecclesia_ui/client/screens/joined_election_list.dart';
 import 'package:ecclesia_ui/client/screens/election_dashboard.dart';
 import 'package:ecclesia_ui/client/screens/joined_organization_list.dart';
 import 'package:ecclesia_ui/client/screens/past_elections.dart';
@@ -18,7 +18,7 @@ import 'package:go_router/go_router.dart';
 
 GoRouter appRouter = GoRouter(
   routes: <GoRoute>[
-    // Home
+    // Joined Election List Screen
     GoRoute(
       path: '/',
       builder: (context, state) => BlocProvider.value(
@@ -26,7 +26,7 @@ GoRouter appRouter = GoRouter(
         child: BlocBuilder<LoggedUserBloc, LoggedUserState>(
           builder: (context, state) {
             if (state is LoggedUserLoaded) {
-              return Home(user: state.user);
+              return JoinedElectionList(user: state.user);
               // return const Welcome();
             } else {
               return const Welcome();

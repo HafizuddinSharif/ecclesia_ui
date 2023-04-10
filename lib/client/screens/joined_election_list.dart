@@ -2,18 +2,20 @@ import 'package:ecclesia_ui/data/models/election_model.dart';
 import 'package:ecclesia_ui/client/widgets/custom_appbar.dart';
 import 'package:ecclesia_ui/client/widgets/custom_drawer.dart';
 import 'package:ecclesia_ui/client/widgets/election_card.dart';
+import 'package:ecclesia_ui/data/models/election_status_model.dart';
 import 'package:ecclesia_ui/data/models/voter_model.dart';
 import 'package:ecclesia_ui/server/bloc/election_just_ended_bloc.dart';
 import 'package:ecclesia_ui/server/bloc/joined_elections_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-// This screen is the home screen or can be known as 'Election list' screen which is meant to list current active joined election(s).
+// This screen is the home screen or can be known as 'Joined election list'
+// screen which is meant to list current active joined election(s).
 
-class Home extends StatelessWidget {
+class JoinedElectionList extends StatelessWidget {
   final Voter user;
 
-  const Home({
+  const JoinedElectionList({
     Key? key,
     required this.user,
   }) : super(key: key);
