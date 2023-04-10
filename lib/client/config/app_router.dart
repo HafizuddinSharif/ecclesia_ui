@@ -3,10 +3,10 @@ import 'package:ecclesia_ui/client/screens/joined_election_list.dart';
 import 'package:ecclesia_ui/client/screens/election_dashboard.dart';
 import 'package:ecclesia_ui/client/screens/joined_organization_list.dart';
 import 'package:ecclesia_ui/client/screens/past_elections.dart';
-import 'package:ecclesia_ui/client/screens/register_camera.dart';
-import 'package:ecclesia_ui/client/screens/register_confirmation.dart';
-import 'package:ecclesia_ui/client/screens/register_confirmed.dart';
-import 'package:ecclesia_ui/client/screens/register_method.dart';
+import 'package:ecclesia_ui/client/screens/join_camera.dart';
+import 'package:ecclesia_ui/client/screens/join_confirmation.dart';
+import 'package:ecclesia_ui/client/screens/join_confirmed.dart';
+import 'package:ecclesia_ui/client/screens/join_method.dart';
 import 'package:ecclesia_ui/client/screens/result.dart';
 import 'package:ecclesia_ui/client/screens/voting.dart';
 import 'package:ecclesia_ui/client/screens/voting_casted.dart';
@@ -85,13 +85,13 @@ GoRouter appRouter = GoRouter(
         GoRoute(
           path: 'register-organization',
           builder: (BuildContext context, GoRouterState state) {
-            return const RegisterMethod(isElection: false);
+            return const JoinMethod(isElection: false);
           },
           routes: [
             GoRoute(
                 path: 'confirmation',
                 builder: (BuildContext context, GoRouterState state) {
-                  return const RegisterConfirmation(
+                  return const JoinConfirmation(
                     isElection: false,
                   );
                 },
@@ -99,7 +99,7 @@ GoRouter appRouter = GoRouter(
                   GoRoute(
                     path: 'confirmed',
                     builder: (BuildContext context, GoRouterState state) {
-                      return const RegisterConfirmed(
+                      return const JoinConfirmed(
                         isElection: false,
                       );
                     },
@@ -108,7 +108,7 @@ GoRouter appRouter = GoRouter(
             GoRoute(
               path: 'camera',
               builder: (BuildContext context, GoRouterState state) {
-                return const RegisterCamera(isElection: false);
+                return const JoinCamera(isElection: false);
               },
             ),
           ],
@@ -117,26 +117,26 @@ GoRouter appRouter = GoRouter(
         GoRoute(
           path: 'register-election',
           builder: (BuildContext context, GoRouterState state) {
-            return const RegisterMethod(isElection: true);
+            return const JoinMethod(isElection: true);
           },
           routes: [
             GoRoute(
                 path: 'confirmation',
                 builder: (BuildContext context, GoRouterState state) {
-                  return const RegisterConfirmation(isElection: true);
+                  return const JoinConfirmation(isElection: true);
                 },
                 routes: [
                   GoRoute(
                     path: 'confirmed',
                     builder: (BuildContext context, GoRouterState state) {
-                      return const RegisterConfirmed(isElection: true);
+                      return const JoinConfirmed(isElection: true);
                     },
                   ),
                 ]),
             GoRoute(
               path: 'camera',
               builder: (BuildContext context, GoRouterState state) {
-                return const RegisterCamera(
+                return const JoinCamera(
                   isElection: true,
                 );
               },

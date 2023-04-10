@@ -8,10 +8,10 @@ import 'package:go_router/go_router.dart';
 // Screen to prompt user whether their intended organization/election
 // to be joined is correct.
 
-class RegisterConfirmation extends StatelessWidget {
+class JoinConfirmation extends StatelessWidget {
   final bool isElection;
 
-  const RegisterConfirmation({Key? key, required this.isElection}) : super(key: key);
+  const JoinConfirmation({Key? key, required this.isElection}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

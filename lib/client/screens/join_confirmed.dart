@@ -8,15 +8,15 @@ import 'package:go_router/go_router.dart';
 // organization/election
 // DEV NOTE: At the moment it is hard-coded
 
-class RegisterConfirmed extends StatefulWidget {
+class JoinConfirmed extends StatefulWidget {
   final bool isElection;
-  const RegisterConfirmed({Key? key, required this.isElection}) : super(key: key);
+  const JoinConfirmed({Key? key, required this.isElection}) : super(key: key);
 
   @override
-  State<RegisterConfirmed> createState() => _RegisterConfirmedState();
+  State<JoinConfirmed> createState() => _JoinConfirmedState();
 }
 
-class _RegisterConfirmedState extends State<RegisterConfirmed> {
+class _JoinConfirmedState extends State<JoinConfirmed> {
   bool hasLoaded = false;
 
   @override

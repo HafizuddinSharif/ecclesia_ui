@@ -8,15 +8,15 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 // Screen to use camera to scan QR code to
 // either join an organization or an election.
 
-class RegisterCamera extends StatefulWidget {
+class JoinCamera extends StatefulWidget {
   final bool isElection;
-  const RegisterCamera({super.key, required this.isElection});
+  const JoinCamera({super.key, required this.isElection});
 
   @override
-  State<RegisterCamera> createState() => _RegisterCameraState();
+  State<JoinCamera> createState() => _JoinCameraState();
 }
 
-class _RegisterCameraState extends State<RegisterCamera> {
+class _JoinCameraState extends State<JoinCamera> {
   MobileScannerController cameraController = MobileScannerController();
   final bool _screenOpened = false;
 
