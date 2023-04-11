@@ -18,7 +18,20 @@ flutter --version
 
 If the version of flutter did not print out, it means your machine does not have flutter installed. Click [here](https://docs.flutter.dev/get-started/install/windows) to learn how to install flutter into your machine.
 
-Once you have installed Flutter, import this project to Android Studio, or VS Code, or Xcode to run this mobile client.
+Once you have installed Flutter, go into the directory of this project and run:
+
+```
+flutter pub get
+flutter run
+```
+
+If flutter has a problem, run:
+
+```
+flutter doctor
+```
+
+And fix any error that is presented and try to run again.
 
 ## Developer notes
 
